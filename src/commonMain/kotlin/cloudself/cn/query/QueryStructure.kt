@@ -6,7 +6,7 @@ import kotlin.js.JsExport
 
 data class QueryStructure(
     val action: QueryStructureAction = QueryStructureAction.SELECT,
-    val fields: Array<Field> = arrayOf(Field(column = "*")),
+    val fields: Array<Field> = arrayOf(),
     val from: QueryStructureFrom = QueryStructureFrom("", arrayOf()),
     val where: Array<WhereClause> = arrayOf(),
     val orderBy: Array<OrderByClause> = arrayOf(),

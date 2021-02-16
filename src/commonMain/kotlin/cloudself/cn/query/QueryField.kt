@@ -57,6 +57,7 @@ abstract class FinalQueryField<
     }
 
     fun run(): List<T> {
+        println(queryStructure)
         return arrayListOf()
     }
 
