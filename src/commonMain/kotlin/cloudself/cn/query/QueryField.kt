@@ -2,6 +2,7 @@
 @file:Suppress("EXPERIMENTAL_API_USAGE", "NON_EXPORTABLE_TYPE")
 package cloudself.cn.query
 
+import cloudself.cn.expects.access
 import cloudself.cn.types.CreateQueryField
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
@@ -19,36 +20,59 @@ interface IFieldGenerator {
     fun _getTableName(): String
 }
 
-abstract class FinalQueryField<T, FIELD_GENERATOR: IFieldGenerator> constructor(private val queryStructure: QueryStructure) {
-    protected abstract val createField: CreateQueryField<FinalQueryField<T, FIELD_GENERATOR>>
+abstract class FinalQueryField<
+        T,
+        WHERE_FIELD: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        ORDER_BY_FIELD: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        COLUMN_LIMITER_FILED: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        COLUMNS_LIMITER_FILED: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        FIELD_GENERATOR: IFieldGenerator,
+> constructor(private val queryStructure: QueryStructure) {
+    protected abstract val createField: CreateQueryField<FinalQueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>>
+    protected abstract val createColumnLimiterField: CreateQueryField<COLUMN_LIMITER_FILED>
+    protected abstract val createColumnsLimiterField: CreateQueryField<COLUMNS_LIMITER_FILED>
     protected abstract val fieldGenerator: () -> FIELD_GENERATOR
 
-    fun limit(limit: Int): FinalQueryField<T, FIELD_GENERATOR> {
+    fun limit(limit: Int): FinalQueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR> {
         return createField(queryStructure.copy(limit = limit))
     }
 
-    fun columnsLimiter(limiter: (l: FIELD_GENERATOR) -> FIELD_GENERATOR): FinalQueryField<T, FIELD_GENERATOR> {
-        val fields = limiter(fieldGenerator())._getFields()
-        return createField(queryStructure.copy(fields = fields.toTypedArray()))
+    protected fun <T>getColumn(field: Field): List<T> {
+        val newQueryStructure = queryStructure.copy(fields = queryStructure.fields + field)
+        val result = createField(newQueryStructure).run()
+        return result.map { access(it as Any, field.column) }
     }
 
-    fun columnLimiter() {
+    fun columnsLimiter(): COLUMNS_LIMITER_FILED {
+        return createColumnsLimiterField(queryStructure)
+    }
 
+    fun columnLimiter(): COLUMN_LIMITER_FILED {
+        return createColumnLimiterField(queryStructure)
+    }
+
+    fun runLimit1(): T? {
+        val results = createField(queryStructure.copy(limit = 1)).run()
+        return results.getOrNull(0)
     }
 
     fun run(): List<T> {
         return arrayListOf()
     }
+
     fun pageable() {
     }
 }
 
 abstract class QueryField<
         T,
-        WHERE_FIELD: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR>,
-        ORDER_BY_FIELD: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR>,
+        WHERE_FIELD: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        ORDER_BY_FIELD: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        COLUMN_LIMITER_FILED: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
+        COLUMNS_LIMITER_FILED: QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>,
         FIELD_GENERATOR: IFieldGenerator,
-> constructor(private val queryStructure: QueryStructure): FinalQueryField<T, FIELD_GENERATOR>(queryStructure) {
+> constructor(protected val queryStructure: QueryStructure)
+    : FinalQueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>(queryStructure) {
     protected abstract val type: QueryFieldType
     protected abstract val createWhereField: CreateQueryField<WHERE_FIELD>
     protected abstract val createOrderByField: CreateQueryField<ORDER_BY_FIELD>
@@ -75,10 +99,11 @@ abstract class QueryField<
         }
 
         val orWhereClauses = factor(createWhereField(QueryStructure())).queryStructure.where
-        return createWhereField(queryStructure.copy(where = queryStructure.where + WhereClause(operator = "or", value = orWhereClauses)))
+        val newWhereClause = queryStructure.where + WhereClause(operator = "or", value = orWhereClauses)
+        return createWhereField(queryStructure.copy(where = newWhereClause))
     }
 
-    fun andForeignField(vararg fields: QueryField<*, *, *, *>): WHERE_FIELD {
+    fun andForeignField(vararg fields: QueryField<*, *, *, *, *, *>): WHERE_FIELD {
         val newWhereClause = queryStructure.where.toMutableList()
         for (field in fields) {
             newWhereClause.addAll(field.queryStructure.where)

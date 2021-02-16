@@ -9,8 +9,8 @@ import kotlin.js.JsExport
 
 interface QueryPro<
         QUERY: QueryPro<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR>,
-        WHERE_FIELD: QueryField<*, *, *, *>,
-        ORDER_BY_FIELD: QueryField<*, *, *, *>,
+        WHERE_FIELD: QueryField<*, *, *, *, *, *>,
+        ORDER_BY_FIELD: QueryField<*, *, *, *, *, *>,
         FIELD_GENERATOR: IFieldGenerator
 > {
     fun selectBy(): WHERE_FIELD
@@ -26,8 +26,8 @@ interface QueryPro<
 
 abstract class QueryProImpl<
         QUERY: QueryPro<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR>,
-        WHERE_FIELD: QueryField<*, *, *, *>,
-        ORDER_BY_FIELD: QueryField<*, *, *, *>,
+        WHERE_FIELD: QueryField<*, *, *, *, *, *>,
+        ORDER_BY_FIELD: QueryField<*, *, *, *, *, *>,
         FIELD_GENERATOR: IFieldGenerator
 > constructor(private val queryStructure: QueryStructure): QueryPro<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR> {
     protected abstract val createQuery: CreateQuery<QUERY>

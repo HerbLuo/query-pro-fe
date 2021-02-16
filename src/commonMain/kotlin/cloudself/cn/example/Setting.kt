@@ -7,7 +7,7 @@ import kotlin.jvm.JvmStatic
 
 data class Setting(
     private val id: Long,
-    private val userId: String,
+    private val userId: Long,
     private val kee: String,
     private val value: String,
 )
@@ -39,11 +39,17 @@ class SettingQueryPro {
     }
 
     class WhereField constructor(queryStructure: QueryStructure)
-        : QueryField<Setting, WhereField, OrderByField, FieldGenerator>(queryStructure) {
+        : QueryField<
+            Setting, WhereField, OrderByField, ColumnLimiterField, ColumnsLimiterField, FieldGenerator
+        >(queryStructure) {
         override val type = QueryFieldType.WHERE_FIELD
         override val fieldGenerator = { FieldGenerator() }
         override val createWhereField: CreateQueryField<WhereField> = { queryStructure -> WhereField(queryStructure) }
         override val createOrderByField: CreateQueryField<OrderByField> = { queryStructure -> OrderByField(queryStructure) }
+        override val createColumnLimiterField: CreateQueryField<ColumnLimiterField> =
+            { queryStructure -> ColumnLimiterField(queryStructure) }
+        override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
+            { queryStructure -> ColumnsLimiterField(queryStructure) }
 
         @JvmField val id = QueryKeywords(Companion.createField("id"), queryStructure, createWhereField)
         @JvmField val userId = QueryKeywords(Companion.createField("userId"), queryStructure, createWhereField)
@@ -52,15 +58,62 @@ class SettingQueryPro {
     }
 
     class OrderByField constructor(queryStructure: QueryStructure)
-        : QueryField<Setting, WhereField, OrderByField, FieldGenerator>(queryStructure) {
+        : QueryField<
+            Setting, WhereField, OrderByField, ColumnLimiterField, ColumnsLimiterField, FieldGenerator
+        >(queryStructure) {
         override val type = QueryFieldType.ORDER_BY_FIELD
         override val fieldGenerator = { FieldGenerator() }
         override val createWhereField: CreateQueryField<WhereField> = { queryStructure -> WhereField(queryStructure) }
         override val createOrderByField: CreateQueryField<OrderByField> = { queryStructure -> OrderByField(queryStructure) }
+        override val createColumnLimiterField: CreateQueryField<ColumnLimiterField> =
+            { queryStructure -> ColumnLimiterField(queryStructure) }
+        override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
+            { queryStructure -> ColumnsLimiterField(queryStructure) }
 
-        @JvmField val id = QueryOrderByKeywords(Companion.createField("id"), queryStructure, createOrderByField)
-        @JvmField val userId = QueryOrderByKeywords(Companion.createField("userId"), queryStructure, createOrderByField)
-        @JvmField val kee = QueryOrderByKeywords(Companion.createField("kee"), queryStructure, createOrderByField)
-        @JvmField val value = QueryOrderByKeywords(Companion.createField("value"), queryStructure, createOrderByField)
+        fun id() = QueryOrderByKeywords(Companion.createField("id"), queryStructure, createOrderByField)
+        fun userId() = QueryOrderByKeywords(Companion.createField("userId"), queryStructure, createOrderByField)
+        fun kee() = QueryOrderByKeywords(Companion.createField("kee"), queryStructure, createOrderByField)
+        fun value() = QueryOrderByKeywords(Companion.createField("value"), queryStructure, createOrderByField)
+    }
+
+    class ColumnLimiterField constructor(queryStructure: QueryStructure)
+        : QueryField<
+            Setting, WhereField, OrderByField, ColumnLimiterField, ColumnsLimiterField, FieldGenerator
+        >(queryStructure) {
+        override val type = QueryFieldType.ORDER_BY_FIELD
+        override val fieldGenerator = { FieldGenerator() }
+        override val createWhereField: CreateQueryField<WhereField> = { queryStructure -> WhereField(queryStructure) }
+        override val createOrderByField: CreateQueryField<OrderByField> = { queryStructure -> OrderByField(queryStructure) }
+        override val createColumnLimiterField: CreateQueryField<ColumnLimiterField> =
+            { queryStructure -> ColumnLimiterField(queryStructure) }
+        override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
+            { queryStructure -> ColumnsLimiterField(queryStructure) }
+
+        fun id() = getColumn<Long>(Field(TABLE_NAME, "id"))
+        fun userId() = getColumn<Long>(Field(TABLE_NAME, "userId"))
+        fun kee() = getColumn<String>(Field(TABLE_NAME, "kee"))
+        fun value() = getColumn<String>(Field(TABLE_NAME, "value"))
+    }
+
+    class ColumnsLimiterField constructor(queryStructure: QueryStructure)
+        : QueryField<
+            Setting, WhereField, OrderByField, ColumnLimiterField, ColumnsLimiterField, FieldGenerator
+        >(queryStructure) {
+        override val type = QueryFieldType.ORDER_BY_FIELD
+        override val fieldGenerator = { FieldGenerator() }
+        override val createWhereField: CreateQueryField<WhereField> = { queryStructure -> WhereField(queryStructure) }
+        override val createOrderByField: CreateQueryField<OrderByField> = { queryStructure -> OrderByField(queryStructure) }
+        override val createColumnLimiterField: CreateQueryField<ColumnLimiterField> =
+            { queryStructure -> ColumnLimiterField(queryStructure) }
+        override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
+            { queryStructure -> ColumnsLimiterField(queryStructure) }
+
+        fun id() = with("id")
+        fun userId() = with("userId")
+        fun kee() = with("kee")
+        fun value() = with("value")
+
+        private fun with(column: String) =
+            ColumnsLimiterField(queryStructure.copy(fields = queryStructure.fields + Field(TABLE_NAME, column)))
     }
 }
