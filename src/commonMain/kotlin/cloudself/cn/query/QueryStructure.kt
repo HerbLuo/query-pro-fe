@@ -5,7 +5,7 @@ package cloudself.cn.query
 import kotlin.js.JsExport
 
 data class QueryStructure(
-    val action: QueryStructureAction = QueryStructureAction.SELECT,
+    val action: String = QueryStructureAction.SELECT,
     val fields: Array<Field> = arrayOf(),
     val from: QueryStructureFrom = QueryStructureFrom("", arrayOf()),
     val where: Array<WhereClause> = arrayOf(),
@@ -55,10 +55,10 @@ data class WhereClause(
     val value: Any? = null // null arrayOr<string boolean integer long date> WhereClause[]
 )
 
-sealed class QueryStructureAction {
-    object SELECT : QueryStructureAction()
-    object UPDATE : QueryStructureAction()
-    object DELETE : QueryStructureAction()
+object QueryStructureAction {
+    const val SELECT = "SELECT"
+    const val UPDATE = "UPDATE"
+    const val DELETE = "DELETE"
 }
 
 data class FromJoinerOn(

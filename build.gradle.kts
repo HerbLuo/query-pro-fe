@@ -62,4 +62,15 @@ application {
 
 tasks.getByName<KotlinWebpack>("jsBrowserProductionWebpack") {
     outputFileName = "output.js"
+    doLast {
+        val dtsFrom = File(projectDir, "/build/js/packages/query-pro-fe/kotlin/query-pro-fe.d.ts")
+        val dts = File(projectDir, "/src/tsMain/src/query-pro-fe.d.ts")
+//        org.jetbrains.kotlin.com.intellij.openapi.util.io.FileUtil.delete(dts)
+        org.jetbrains.kotlin.com.intellij.openapi.util.io.FileUtil.copy(dtsFrom, dts)
+
+        val jsFrom = File(projectDir, "/build/js/packages/query-pro-fe/kotlin/query-pro-fe.js")
+        val js = File(projectDir, "/src/tsMain/src/query-pro-fe.js")
+//        org.jetbrains.kotlin.com.intellij.openapi.util.io.FileUtil.delete(js)
+        org.jetbrains.kotlin.com.intellij.openapi.util.io.FileUtil.copy(jsFrom, js)
+    }
 }

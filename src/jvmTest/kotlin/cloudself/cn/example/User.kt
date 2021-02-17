@@ -23,7 +23,7 @@ class UserQueryPro {
     companion object: @JvmStatic QueryPro<Query, WhereField, OrderByField, FieldGenerator> by
         Query(QueryStructure(from = QueryStructureFrom("user", arrayOf()))) {
             private const val TABLE_NAME = "user"
-            fun createField(column: String) = Field(TABLE_NAME, column)
+            private fun createField(column: String) = Field(TABLE_NAME, column)
         }
 
     class FieldGenerator: IFieldGenerator {
@@ -31,7 +31,7 @@ class UserQueryPro {
         fun id() = this.also { fields.add(createField("id")) }
         fun name() = this.also { fields.add(createField("name")) }
         fun age() = this.also { fields.add(createField("age")) }
-        override fun _getFields() = fields
+        override fun _getFields() = fields.toTypedArray()
         override fun _getTableName() = TABLE_NAME
     }
 
@@ -46,9 +46,9 @@ class UserQueryPro {
         override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
             { queryStructure -> ColumnsLimiterField(queryStructure) }
 
-        @JvmField val id = QueryKeywords(Companion.createField("id"), queryStructure, createWhereField)
-        @JvmField val name = QueryKeywords(Companion.createField("name"), queryStructure, createWhereField)
-        @JvmField val age = QueryKeywords(Companion.createField("age"), queryStructure, createWhereField)
+        @JvmField val id = QueryKeywords(createField("id"), queryStructure, createWhereField)
+        @JvmField val name = QueryKeywords(createField("name"), queryStructure, createWhereField)
+        @JvmField val age = QueryKeywords(createField("age"), queryStructure, createWhereField)
     }
 
     class OrderByField constructor(queryStructure: QueryStructure)
@@ -62,9 +62,9 @@ class UserQueryPro {
         override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
             { queryStructure -> ColumnsLimiterField(queryStructure) }
 
-        fun id() = QueryOrderByKeywords(Companion.createField("id"), queryStructure, createOrderByField)
-        fun name() = QueryOrderByKeywords(Companion.createField("name"), queryStructure, createOrderByField)
-        fun age() = QueryOrderByKeywords(Companion.createField("age"), queryStructure, createOrderByField)
+        fun id() = QueryOrderByKeywords(createField("id"), queryStructure, createOrderByField)
+        fun name() = QueryOrderByKeywords(createField("name"), queryStructure, createOrderByField)
+        fun age() = QueryOrderByKeywords(createField("age"), queryStructure, createOrderByField)
     }
 
     class ColumnLimiterField constructor(queryStructure: QueryStructure)

@@ -1,6 +1,8 @@
 package cloudself.cn;
 
 import cloudself.cn.example.User;
+import cloudself.cn.example.SettingQueryPro;
+import cloudself.cn.example.UserQueryPro;
 import org.junit.Test;
 
 import java.util.List;
@@ -8,8 +10,8 @@ import java.util.List;
 public class MainTest {
     @Test
     public void test() {
-        final cloudself.cn.example.UserQueryPro.Companion UserQueryPro = cloudself.cn.example.UserQueryPro.Companion;
-        final cloudself.cn.example.SettingQueryPro.Companion SettingQueryPro = cloudself.cn.example.SettingQueryPro.Companion;
+        final UserQueryPro.Companion UserQueryPro = cloudself.cn.example.UserQueryPro.Companion;
+        final SettingQueryPro.Companion SettingQueryPro = cloudself.cn.example.SettingQueryPro.Companion;
 
         //noinspection unused
         final List<Long> ids = SettingQueryPro.selectBy().id.equalsTo(1).columnLimiter().id();

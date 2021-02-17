@@ -15,7 +15,7 @@ sealed class QueryFieldType {
 
 interface IFieldGenerator {
     @Suppress("FunctionName")
-    fun _getFields(): List<Field>
+    fun _getFields(): Array<Field>
     @Suppress("FunctionName")
     fun _getTableName(): String
 }
@@ -53,12 +53,15 @@ abstract class FinalQueryField<
 
     fun runLimit1(): T? {
         val results = createField(queryStructure.copy(limit = 1)).run()
-        return results.getOrNull(0)
+        if (results.isEmpty()) {
+            return null
+        }
+        return results[0]
     }
 
-    fun run(): List<T> {
-        println(queryStructure)
-        return arrayListOf()
+    fun run(): Array<T> {
+        @Suppress("UNCHECKED_CAST")
+        return emptyArray<Int>() as Array<T>
     }
 
     fun pageable() {

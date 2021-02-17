@@ -6,6 +6,7 @@ package cloudself.cn.query
 import cloudself.cn.types.CreateQuery
 import cloudself.cn.types.CreateQueryField
 import kotlin.js.JsExport
+import kotlin.js.JsName
 
 interface QueryPro<
         QUERY: QueryPro<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR>,
@@ -56,8 +57,8 @@ abstract class QueryProImpl<
         val field2TableName = fields2._getTableName()
 
         var foreignTableName: String? = null
-        var foreignFields: List<Field>? = null
-        var currentTableFields: List<Field>? = null
+        var foreignFields: Array<Field>? = null
+        var currentTableFields: Array<Field>? = null
 
         if (field1TableName == currentTableName) { // 其中一个是主表
             foreignTableName = field2TableName

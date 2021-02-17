@@ -25,7 +25,7 @@ class SettingQueryPro {
     companion object: @JvmStatic QueryPro<Query, WhereField, OrderByField, FieldGenerator> by
         Query(QueryStructure(from = QueryStructureFrom("setting", arrayOf()))) {
             private const val TABLE_NAME = "setting"
-            fun createField(column: String) = Field(TABLE_NAME, column)
+            private fun createField(column: String) = Field(TABLE_NAME, column)
         }
 
     class FieldGenerator: IFieldGenerator {
@@ -34,7 +34,7 @@ class SettingQueryPro {
         fun userId() = this.also { fields.add(createField("userId")) }
         fun kee() = this.also { fields.add(createField("kee")) }
         fun value() = this.also { fields.add(createField("value")) }
-        override fun _getFields() = fields
+        override fun _getFields() = fields.toTypedArray()
         override fun _getTableName() = TABLE_NAME
     }
 
@@ -51,10 +51,10 @@ class SettingQueryPro {
         override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
             { queryStructure -> ColumnsLimiterField(queryStructure) }
 
-        @JvmField val id = QueryKeywords(Companion.createField("id"), queryStructure, createWhereField)
-        @JvmField val userId = QueryKeywords(Companion.createField("userId"), queryStructure, createWhereField)
-        @JvmField val kee = QueryKeywords(Companion.createField("kee"), queryStructure, createWhereField)
-        @JvmField val value = QueryKeywords(Companion.createField("value"), queryStructure, createWhereField)
+        @JvmField val id = QueryKeywords(createField("id"), queryStructure, createWhereField)
+        @JvmField val userId = QueryKeywords(createField("userId"), queryStructure, createWhereField)
+        @JvmField val kee = QueryKeywords(createField("kee"), queryStructure, createWhereField)
+        @JvmField val value = QueryKeywords(createField("value"), queryStructure, createWhereField)
     }
 
     class OrderByField constructor(queryStructure: QueryStructure)
@@ -70,10 +70,10 @@ class SettingQueryPro {
         override val createColumnsLimiterField: CreateQueryField<ColumnsLimiterField> =
             { queryStructure -> ColumnsLimiterField(queryStructure) }
 
-        fun id() = QueryOrderByKeywords(Companion.createField("id"), queryStructure, createOrderByField)
-        fun userId() = QueryOrderByKeywords(Companion.createField("userId"), queryStructure, createOrderByField)
-        fun kee() = QueryOrderByKeywords(Companion.createField("kee"), queryStructure, createOrderByField)
-        fun value() = QueryOrderByKeywords(Companion.createField("value"), queryStructure, createOrderByField)
+        fun id() = QueryOrderByKeywords(createField("id"), queryStructure, createOrderByField)
+        fun userId() = QueryOrderByKeywords(createField("userId"), queryStructure, createOrderByField)
+        fun kee() = QueryOrderByKeywords(createField("kee"), queryStructure, createOrderByField)
+        fun value() = QueryOrderByKeywords(createField("value"), queryStructure, createOrderByField)
     }
 
     class ColumnLimiterField constructor(queryStructure: QueryStructure)
