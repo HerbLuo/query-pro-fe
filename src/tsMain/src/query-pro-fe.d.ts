@@ -184,4 +184,14 @@ export namespace cloudself.cn.query {
         toString(): string;
     }
 }
+export namespace cloudself.cn {
+    class QueryFieldJs<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR> extends cloudself.cn.query.QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR> {
+        constructor(queryStructure: cloudself.cn.query.QueryStructure, type: typeof cloudself.cn.query.QueryFieldType.WHERE_FIELD, fieldGenerator: () => FIELD_GENERATOR, createWhereField: (p0: cloudself.cn.query.QueryStructure) => WHERE_FIELD, createOrderByField: (p0: cloudself.cn.query.QueryStructure) => ORDER_BY_FIELD, createColumnLimiterField: (p0: cloudself.cn.query.QueryStructure) => COLUMN_LIMITER_FILED, createColumnsLimiterField: (p0: cloudself.cn.query.QueryStructure) => COLUMNS_LIMITER_FILED);
+    }
+}
+export namespace cloudself.cn {
+    class QueryProJs<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR> extends cloudself.cn.query.QueryProImpl<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR> {
+        constructor(queryStructure: cloudself.cn.query.QueryStructure, createQuery: (p0: cloudself.cn.query.QueryStructure) => QUERY, createWhereField: (p0: cloudself.cn.query.QueryStructure) => WHERE_FIELD, createOrderByField: (p0: cloudself.cn.query.QueryStructure) => ORDER_BY_FIELD, fieldGenerator: () => FIELD_GENERATOR);
+    }
+}
 export as namespace query_pro_fe;

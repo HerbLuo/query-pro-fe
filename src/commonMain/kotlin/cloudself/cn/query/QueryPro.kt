@@ -6,7 +6,6 @@ package cloudself.cn.query
 import cloudself.cn.types.CreateQuery
 import cloudself.cn.types.CreateQueryField
 import kotlin.js.JsExport
-import kotlin.js.JsName
 
 interface QueryPro<
         QUERY: QueryPro<QUERY, WHERE_FIELD, ORDER_BY_FIELD, FIELD_GENERATOR>,

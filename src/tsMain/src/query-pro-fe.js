@@ -39,6 +39,10 @@
   ORDER_BY_FIELD.prototype.constructor = ORDER_BY_FIELD;
   QueryField.prototype = Object.create(FinalQueryField.prototype);
   QueryField.prototype.constructor = QueryField;
+  QueryFieldJs.prototype = Object.create(QueryField.prototype);
+  QueryFieldJs.prototype.constructor = QueryFieldJs;
+  QueryProJs.prototype = Object.create(QueryProImpl.prototype);
+  QueryProJs.prototype.constructor = QueryProJs;
   function toMutableList(_this_) {
     return ArrayList_init_$Create$_0(asCollection(_this_));
   }
@@ -2071,16 +2075,16 @@
   function FinalQueryField(queryStructure) {
     this._queryStructure = queryStructure;
   }
-  FinalQueryField.prototype.limit_1 = function (limit) {
-    var tmp = this._get_createField__0();
+  FinalQueryField.prototype.limit_2 = function (limit) {
+    var tmp = this._get_createField__1();
     return tmp(this._queryStructure.copy$default(null, null, null, null, null, limit, 31, null));
   };
-  FinalQueryField.prototype.getColumn_0 = function (field) {
+  FinalQueryField.prototype.getColumn_1 = function (field) {
     var tmp0_plus_0 = this._queryStructure._fields;
     var tmp0_arrayOf_0_1 = [field];
     var tmp = tmp0_plus_0.concat(tmp0_arrayOf_0_1);
     var newQueryStructure = this._queryStructure.copy$default(null, tmp, null, null, null, null, 61, null);
-    var result = this._get_createField__0()(newQueryStructure).run_0();
+    var result = this._get_createField__1()(newQueryStructure).run_1();
     var tmp0_mapTo_0_1 = ArrayList_init_$Create$(result.length);
     var indexedObject = result;
     var inductionVariable = 0;
@@ -2093,26 +2097,26 @@
     }
     return tmp0_mapTo_0_1;
   };
-  FinalQueryField.prototype.columnsLimiter_0 = function () {
-    return this._get_createColumnsLimiterField__0()(this._queryStructure);
+  FinalQueryField.prototype.columnsLimiter_1 = function () {
+    return this._get_createColumnsLimiterField__1()(this._queryStructure);
   };
-  FinalQueryField.prototype.columnLimiter_0 = function () {
-    return this._get_createColumnLimiterField__0()(this._queryStructure);
+  FinalQueryField.prototype.columnLimiter_1 = function () {
+    return this._get_createColumnLimiterField__1()(this._queryStructure);
   };
-  FinalQueryField.prototype.runLimit1_0 = function () {
-    var tmp = this._get_createField__0();
-    var results = tmp(this._queryStructure.copy$default(null, null, null, null, null, 1, 31, null)).run_0();
+  FinalQueryField.prototype.runLimit1_1 = function () {
+    var tmp = this._get_createField__1();
+    var results = tmp(this._queryStructure.copy$default(null, null, null, null, null, 1, 31, null)).run_1();
     if (results.length === 0) {
       return null;
     } else {
     }
     return results[0];
   };
-  FinalQueryField.prototype.run_0 = function () {
+  FinalQueryField.prototype.run_1 = function () {
     var tmp = [];
     return isArray(tmp) ? tmp : THROW_CCE();
   };
-  FinalQueryField.prototype.pageable_0 = function () {
+  FinalQueryField.prototype.pageable_1 = function () {
   };
   FinalQueryField.$metadata$ = {
     simpleName: 'FinalQueryField',
@@ -2123,7 +2127,7 @@
     this._this$0_0 = this$0;
   }
   _no_name_provided__22.prototype.invoke_43 = function (qs) {
-    return this._this$0_0._get_createWhereField__0()(qs);
+    return this._this$0_0._get_createWhereField__2()(qs);
   };
   _no_name_provided__22.prototype.invoke_44 = function (p1) {
     return this.invoke_43(p1 instanceof QueryStructure ? p1 : THROW_CCE());
@@ -2138,45 +2142,45 @@
     var tmp = this;
     tmp._createField = _no_name_provided_$factory_21(this);
   }
-  QueryField.prototype._get_queryStructure_ = function () {
+  QueryField.prototype._get_queryStructure__0 = function () {
     return this._queryStructure_0;
   };
-  QueryField.prototype._get_createField__0 = function () {
+  QueryField.prototype._get_createField__1 = function () {
     return this._createField;
   };
-  QueryField.prototype.customColumn = function (column) {
-    return new QueryKeywords(Field_init_$Create$(null, column, 1, null), this._queryStructure_0, this._get_createWhereField__0());
+  QueryField.prototype.customColumn_0 = function (column) {
+    return new QueryKeywords(Field_init_$Create$(null, column, 1, null), this._queryStructure_0, this._get_createWhereField__2());
   };
-  QueryField.prototype.and = function () {
-    if (!equals(this._get_type_(), WHERE_FIELD_getInstance())) {
-      throw RuntimeException_init_$Create$('' + this._get_type_() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
+  QueryField.prototype.and_0 = function () {
+    if (!equals(this._get_type__0(), WHERE_FIELD_getInstance())) {
+      throw RuntimeException_init_$Create$('' + this._get_type__0() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
     }return this instanceof QueryField ? this : THROW_CCE();
   };
-  QueryField.prototype.or = function (factor) {
-    if (!equals(this._get_type_(), WHERE_FIELD_getInstance())) {
-      throw RuntimeException_init_$Create$('' + this._get_type_() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
+  QueryField.prototype.or_0 = function (factor) {
+    if (!equals(this._get_type__0(), WHERE_FIELD_getInstance())) {
+      throw RuntimeException_init_$Create$('' + this._get_type__0() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
     }if (factor == null) {
-      var tmp = this._get_createWhereField__0();
+      var tmp = this._get_createWhereField__2();
       var tmp0_plus_0 = this._queryStructure_0._where;
       var tmp1_plus_0 = WhereClause_init_$Create$(null, 'or', null, 5, null);
       var tmp0_arrayOf_0_1 = [tmp1_plus_0];
       var tmp_0 = tmp0_plus_0.concat(tmp0_arrayOf_0_1);
       return tmp(this._queryStructure_0.copy$default(null, null, null, tmp_0, null, null, 55, null));
-    }var tmp_1 = this._get_createWhereField__0();
+    }var tmp_1 = this._get_createWhereField__2();
     var orWhereClauses = factor(tmp_1(QueryStructure_init_$Create$(null, null, null, null, null, null, 63, null)))._queryStructure_0._where;
     var tmp2_plus_0 = this._queryStructure_0._where;
     var tmp3_plus_0 = WhereClause_init_$Create$(null, 'or', orWhereClauses, 1, null);
     var tmp0_arrayOf_0_1_0 = [tmp3_plus_0];
     var newWhereClause = tmp2_plus_0.concat(tmp0_arrayOf_0_1_0);
-    var tmp_2 = this._get_createWhereField__0();
+    var tmp_2 = this._get_createWhereField__2();
     return tmp_2(this._queryStructure_0.copy$default(null, null, null, newWhereClause, null, null, 55, null));
   };
-  QueryField.prototype.or$default = function (factor, $mask0, $handler) {
+  QueryField.prototype.or$default_0 = function (factor, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
       factor = null;
-    return this.or(factor);
+    return this.or_0(factor);
   };
-  QueryField.prototype.andForeignField = function (fields) {
+  QueryField.prototype.andForeignField_0 = function (fields) {
     var newWhereClause = toMutableList(this._queryStructure_0._where);
     var indexedObject = fields;
     var inductionVariable = 0;
@@ -2187,12 +2191,12 @@
       addAll(newWhereClause, field._queryStructure_0._where);
       Unit_getInstance();
     }
-    var tmp = this._get_createWhereField__0();
+    var tmp = this._get_createWhereField__2();
     var tmp_0 = copyToArray_0(newWhereClause);
     return tmp(this._queryStructure_0.copy$default(null, null, null, tmp_0, null, null, 55, null));
   };
-  QueryField.prototype.orderBy_2 = function () {
-    return this._get_createOrderByField__0()(this._queryStructure_0);
+  QueryField.prototype.orderBy_4 = function () {
+    return this._get_createOrderByField__2()(this._queryStructure_0);
   };
   QueryField.$metadata$ = {
     simpleName: 'QueryField',
@@ -2382,27 +2386,27 @@
   function QueryProImpl(queryStructure) {
     this._queryStructure_5 = queryStructure;
   }
-  QueryProImpl.prototype.selectBy_0 = function () {
-    var tmp = this._get_createWhereField__0();
+  QueryProImpl.prototype.selectBy_1 = function () {
+    var tmp = this._get_createWhereField__2();
     return tmp(this._queryStructure_5.copy$default('SELECT', null, null, null, null, null, 62, null));
   };
-  QueryProImpl.prototype.selectOneBy_0 = function () {
-    var tmp = this._get_createWhereField__0();
+  QueryProImpl.prototype.selectOneBy_1 = function () {
+    var tmp = this._get_createWhereField__2();
     return tmp(this._queryStructure_5.copy$default('SELECT', null, null, null, null, 1, 30, null));
   };
-  QueryProImpl.prototype.orderBy_2 = function () {
-    var tmp = this._get_createOrderByField__0();
+  QueryProImpl.prototype.orderBy_4 = function () {
+    var tmp = this._get_createOrderByField__2();
     return tmp(this._queryStructure_5.copy$default('SELECT', null, null, null, null, null, 62, null));
   };
-  QueryProImpl.prototype.updateBy_0 = function () {
-    var tmp = this._get_createWhereField__0();
+  QueryProImpl.prototype.updateBy_1 = function () {
+    var tmp = this._get_createWhereField__2();
     return tmp(this._queryStructure_5.copy$default('SELECT', null, null, null, null, null, 62, null));
   };
-  QueryProImpl.prototype.deleteBy_0 = function () {
-    var tmp = this._get_createWhereField__0();
+  QueryProImpl.prototype.deleteBy_1 = function () {
+    var tmp = this._get_createWhereField__2();
     return tmp(this._queryStructure_5.copy$default('SELECT', null, null, null, null, null, 62, null));
   };
-  QueryProImpl.prototype.leftJoinOn_0 = function (fields1, fields2) {
+  QueryProImpl.prototype.leftJoinOn_1 = function (fields1, fields2) {
     var oldFrom = this._queryStructure_5._from;
     var oldJoins = oldFrom._joins;
     var currentTableName = this._queryStructure_5._from._main;
@@ -2459,15 +2463,15 @@
     var tmp2_plus_0 = new FromJoiner(tmp, copyToArray_0(foreignJoinerOn));
     var tmp0_arrayOf_0_1 = [tmp2_plus_0];
     var newJoins = oldJoins.concat(tmp0_arrayOf_0_1);
-    var tmp_0 = this._get_createQuery_();
+    var tmp_0 = this._get_createQuery__0();
     var tmp_1 = oldFrom.copy$default_5(null, newJoins, 1, null);
     return tmp_0(this._queryStructure_5.copy$default(null, null, tmp_1, null, null, null, 59, null));
   };
-  QueryProImpl.prototype.joiner_0 = function () {
-    return this._get_fieldGenerator__1()();
+  QueryProImpl.prototype.joiner_1 = function () {
+    return this._get_fieldGenerator__3()();
   };
-  QueryProImpl.prototype.foreignField_0 = function () {
-    return this._get_createWhereField__0()(this._queryStructure_5);
+  QueryProImpl.prototype.foreignField_1 = function () {
+    return this._get_createWhereField__2()(this._queryStructure_5);
   };
   QueryProImpl.$metadata$ = {
     simpleName: 'QueryProImpl',
@@ -3080,6 +3084,63 @@
     configurable: true,
     get: QueryStructureFrom.prototype._get_joins_
   });
+  function QueryFieldJs(queryStructure, type, fieldGenerator, createWhereField, createOrderByField, createColumnLimiterField, createColumnsLimiterField) {
+    QueryField.call(this, queryStructure);
+    this._type = type;
+    this._fieldGenerator = fieldGenerator;
+    this._createWhereField = createWhereField;
+    this._createOrderByField = createOrderByField;
+    this._createColumnLimiterField = createColumnLimiterField;
+    this._createColumnsLimiterField = createColumnsLimiterField;
+  }
+  QueryFieldJs.prototype._get_type__0 = function () {
+    return this._type;
+  };
+  QueryFieldJs.prototype._get_fieldGenerator__3 = function () {
+    return this._fieldGenerator;
+  };
+  QueryFieldJs.prototype._get_createWhereField__2 = function () {
+    return this._createWhereField;
+  };
+  QueryFieldJs.prototype._get_createOrderByField__2 = function () {
+    return this._createOrderByField;
+  };
+  QueryFieldJs.prototype._get_createColumnLimiterField__1 = function () {
+    return this._createColumnLimiterField;
+  };
+  QueryFieldJs.prototype._get_createColumnsLimiterField__1 = function () {
+    return this._createColumnsLimiterField;
+  };
+  QueryFieldJs.$metadata$ = {
+    simpleName: 'QueryFieldJs',
+    kind: 'class',
+    interfaces: []
+  };
+  function QueryProJs(queryStructure, createQuery, createWhereField, createOrderByField, fieldGenerator) {
+    QueryProImpl.call(this, queryStructure);
+    this._queryStructure_6 = queryStructure;
+    this._createQuery = createQuery;
+    this._createWhereField_0 = createWhereField;
+    this._createOrderByField_0 = createOrderByField;
+    this._fieldGenerator_0 = fieldGenerator;
+  }
+  QueryProJs.prototype._get_createQuery__0 = function () {
+    return this._createQuery;
+  };
+  QueryProJs.prototype._get_createWhereField__2 = function () {
+    return this._createWhereField_0;
+  };
+  QueryProJs.prototype._get_createOrderByField__2 = function () {
+    return this._createOrderByField_0;
+  };
+  QueryProJs.prototype._get_fieldGenerator__3 = function () {
+    return this._fieldGenerator_0;
+  };
+  QueryProJs.$metadata$ = {
+    simpleName: 'QueryProJs',
+    kind: 'class',
+    interfaces: []
+  };
   function access(obj, prop) {
     var jsObj = obj;
     var tmp = jsObj[prop];
@@ -3124,6 +3185,8 @@
   $cloudself$cn$query.FromJoinerOn = FromJoinerOn;
   $cloudself$cn$query.FromJoiner = FromJoiner;
   $cloudself$cn$query.QueryStructureFrom = QueryStructureFrom;
+  $cloudself$cn.QueryFieldJs = QueryFieldJs;
+  $cloudself$cn.QueryProJs = QueryProJs;
   main();
   return _;
 }));
