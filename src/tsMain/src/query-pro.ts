@@ -18,7 +18,7 @@ type IWhereField<T> = {
 } & QueryField<T, IWhereField<T>, IOrderByField<T>, IColumnLimiterField<T>, IColumnsLimiterField<T>, IFieldGenerator<T>>
 
 type IOrderByField<T> = {
-    [key in keyof T]: QueryOrderByKeywords<IOrderByField<T>>
+    [key in keyof T]: () => QueryOrderByKeywords<IOrderByField<T>>
 } & QueryField<T, IWhereField<T>, IOrderByField<T>, IColumnLimiterField<T>, IColumnsLimiterField<T>, IFieldGenerator<T>>
 
 type IFieldGenerator<T> = {
@@ -44,7 +44,6 @@ const createQueryField = (type: string, tableName: string, qs: QueryStructure) =
         createColumnsFilterField(tableName),
     );
     (queryField as any).run = () => {
-        // console.log(queryField);
         debugLog((queryField as any)._queryStructure);
     }
     return queryField;
@@ -67,7 +66,8 @@ const createOrderByField = (tableName: string) => <T>(qs: QueryStructure): IOrde
             if (target[p]) {
                 return target[p];
             }
-            return () => new QueryOrderByKeywords(new Field(tableName, p), qs, createWhereField(tableName));
+            console.log();
+            return () => new QueryOrderByKeywords(new Field(tableName, p), qs, createOrderByField(tableName));
         }
     });
 }
@@ -93,8 +93,8 @@ const fieldGenerator = (tableName: string) => <T>(): IFieldGenerator<T> => {
 
 const createColumnFilterField = (tableName: string) => <T>(qs: QueryStructure): IColumnLimiterField<T> => {
   return new Proxy(createQueryField(QueryFieldType.OTHER_FIELD, tableName, qs) as any, {
-      get(target: QueryFieldJs<any, any, any, any, any, any>, p: PropertyKey, receiver: any): any {
-          return (target as any).getColumn();
+      get(target: QueryFieldJs<any, any, any, any, any, any>, p: string): any {
+          return () => (target as any).getColumn(new Field(tableName, p));
       }
   });
 }
@@ -103,7 +103,7 @@ const createColumnsFilterField = (tableName: string) => <T>(qs: QueryStructure):
   return new Proxy(createQueryField(QueryFieldType.OTHER_FIELD, tableName, qs) as any, {
       get(target: any, p: string): any {
           const newQs: any = {fields: [...qs.fields, new Field(tableName, p)], prototype: qs};
-          return createColumnsFilterField(tableName)(newQs);
+          return () => createColumnsFilterField(tableName)(newQs);
       }
   })
 }

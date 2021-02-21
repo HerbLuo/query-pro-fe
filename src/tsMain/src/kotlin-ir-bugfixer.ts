@@ -5,6 +5,9 @@ import FinalQueryField = cloudself.cn.query.FinalQueryField;
 import QueryFieldJs = cloudself.cn.QueryFieldJs;
 import QueryKeywords = cloudself.cn.query.QueryKeywords;
 import {debugLog} from "./debug-log";
+import QueryWithNotKeywords = cloudself.cn.query.QueryWithNotKeywords;
+import QueryIgnoreCaseKeywords = cloudself.cn.query.QueryIgnoreCaseKeywords;
+import QueryOrderByKeywords = cloudself.cn.query.QueryOrderByKeywords;
 
 function namerFixer(proto: Record<string, any>) {
     debugLog(proto);
@@ -25,5 +28,8 @@ export function fixAll() {
     namerFixer(QueryField.prototype);
     namerFixer(QueryFieldJs.prototype);
     namerFixer(QueryKeywords.prototype);
+    namerFixer(QueryWithNotKeywords.prototype);
+    namerFixer(QueryIgnoreCaseKeywords.prototype);
+    namerFixer(QueryOrderByKeywords.prototype);
     debugLog("all fixed\n");
 }
