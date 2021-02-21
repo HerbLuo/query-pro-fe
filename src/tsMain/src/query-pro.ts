@@ -33,6 +33,18 @@ type IColumnsLimiterField<T> = {
     [key in keyof T]: () => IColumnsLimiterField<T>
 } & QueryField<T, IWhereField<T>, IOrderByField<T>, IColumnLimiterField<T>, IColumnsLimiterField<T>, IFieldGenerator<T>>
 
+export interface QueryAdapter {
+    <T>(queryStructure: QueryStructure): Promise<T>;
+}
+
+let defQueryAdapter: QueryAdapter = (queryStructure: QueryStructure) => {
+    return Promise.reject("unimpl")
+}
+
+export function setQueryAdapter(queryAdapter: QueryAdapter) {
+    defQueryAdapter = queryAdapter;
+}
+
 const createQueryField = (type: string, tableName: string, qs: QueryStructure) => {
     const queryField = new QueryFieldJs(
         qs,
@@ -44,7 +56,9 @@ const createQueryField = (type: string, tableName: string, qs: QueryStructure) =
         createColumnsFilterField(tableName),
     );
     (queryField as any).run = () => {
+        const queryStructure: QueryStructure = (queryField as any)._queryStructure;
         debugLog((queryField as any)._queryStructure);
+        return defQueryAdapter(queryStructure);
     }
     return queryField;
 }
@@ -66,7 +80,6 @@ const createOrderByField = (tableName: string) => <T>(qs: QueryStructure): IOrde
             if (target[p]) {
                 return target[p];
             }
-            console.log();
             return () => new QueryOrderByKeywords(new Field(tableName, p), qs, createOrderByField(tableName));
         }
     });

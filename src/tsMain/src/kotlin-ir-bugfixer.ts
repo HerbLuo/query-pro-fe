@@ -33,3 +33,23 @@ export function fixAll() {
     namerFixer(QueryOrderByKeywords.prototype);
     debugLog("all fixed\n");
 }
+
+export function stringifyKtDataObj(obj: {}): string {
+    const remove_ = (obj: {}) => {
+        const newObj = {};
+        for (const oldKey of Object.keys(obj)) {
+            if (!oldKey.startsWith("_")) {
+                continue;
+            }
+            const key = oldKey.substring(1);
+            const val = (obj as any)[key];
+            if (val !== null && val !== undefined && typeof val === "object") {
+                (newObj as any)[key] = remove_(val);
+            } else {
+                (newObj as any)[key] = val;
+            }
+        }
+        return newObj;
+    }
+    return JSON.stringify(remove_(obj));
+}

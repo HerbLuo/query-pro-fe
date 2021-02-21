@@ -1,13 +1,16 @@
 import {UserPri} from "./model/UserPri";
 import {UserPriSetting} from "./model/UserPriSetting";
 import {QueryPro} from "../src/query-pro";
+import {init} from "./init";
+
+init();
 
 const UserQueryPro = new QueryPro<UserPri>("user_pri");
 const UserSettingQueryPro = new QueryPro<UserPriSetting>("user_pri_setting");
 
 test("selectBy", async () => {
-    UserQueryPro.selectBy().run();
-    UserSettingQueryPro.selectBy().run();
+    await UserQueryPro.selectBy().run();
+    await UserSettingQueryPro.selectBy().run();
 });
 
 test("selectBy equals", async () => {

@@ -3,8 +3,11 @@
 package cloudself.cn.query
 
 import kotlin.js.JsExport
+import kotlin.js.JsName
+import kotlin.jvm.JvmField
 
 data class QueryStructure(
+    @JsName("action")
     val action: String = QueryStructureAction.SELECT,
     val fields: Array<Field> = arrayOf(),
     val from: QueryStructureFrom = QueryStructureFrom("", arrayOf()),
