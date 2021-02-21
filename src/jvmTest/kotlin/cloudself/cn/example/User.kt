@@ -69,7 +69,7 @@ class UserQueryPro {
 
     class ColumnLimiterField constructor(queryStructure: QueryStructure)
         : QueryField<User, WhereField, OrderByField, ColumnLimiterField, ColumnsLimiterField, FieldGenerator>(queryStructure) {
-        override val type = QueryFieldType.ORDER_BY_FIELD
+        override val type = QueryFieldType.OTHER_FIELD
         override val fieldGenerator = { FieldGenerator() }
         override val createWhereField: CreateQueryField<WhereField> = { queryStructure -> WhereField(queryStructure) }
         override val createOrderByField: CreateQueryField<OrderByField> = { queryStructure -> OrderByField(queryStructure) }
@@ -85,7 +85,7 @@ class UserQueryPro {
 
     class ColumnsLimiterField constructor(queryStructure: QueryStructure)
         : QueryField<User, WhereField, OrderByField, ColumnLimiterField, ColumnsLimiterField, FieldGenerator>(queryStructure) {
-        override val type = QueryFieldType.ORDER_BY_FIELD
+        override val type = QueryFieldType.OTHER_FIELD
         override val fieldGenerator = { FieldGenerator() }
         override val createWhereField: CreateQueryField<WhereField> = { queryStructure -> WhereField(queryStructure) }
         override val createOrderByField: CreateQueryField<OrderByField> = { queryStructure -> OrderByField(queryStructure) }

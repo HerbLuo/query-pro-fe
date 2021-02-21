@@ -8,9 +8,10 @@ import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
 
 @Suppress("ClassName")
-sealed class QueryFieldType {
-    object WHERE_FIELD : QueryFieldType()
-    object ORDER_BY_FIELD : QueryFieldType()
+object QueryFieldType {
+    const val WHERE_FIELD = "WHERE_FIELD"
+    const val ORDER_BY_FIELD = "ORDER_BY_FIELD"
+    const val OTHER_FIELD = "OTHER_FIELD"
 }
 
 interface IFieldGenerator {
@@ -37,10 +38,12 @@ abstract class FinalQueryField<
         return createField(queryStructure.copy(limit = limit))
     }
 
-    protected fun <T>getColumn(field: Field): List<T> {
+    protected open fun <T>getColumn(field: Field): Array<T> {
         val newQueryStructure = queryStructure.copy(fields = queryStructure.fields + field)
         val result = createField(newQueryStructure).run()
-        return result.map { access(it as Any, field.column) }
+        val res = result.map { access<T>(it as Any, field.column) }
+        @Suppress("UNCHECKED_CAST")
+        return Array(res.size) { i -> res[i] as Any } as Array<T>
     }
 
     fun columnsLimiter(): COLUMNS_LIMITER_FILED {
@@ -77,7 +80,7 @@ abstract class QueryField<
         FIELD_GENERATOR: IFieldGenerator,
 > constructor(protected val queryStructure: QueryStructure)
     : FinalQueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR>(queryStructure) {
-    protected abstract val type: QueryFieldType
+    protected abstract val type: String
     protected abstract val createWhereField: CreateQueryField<WHERE_FIELD>
     protected abstract val createOrderByField: CreateQueryField<ORDER_BY_FIELD>
     override val createField = { qs: QueryStructure -> createWhereField(qs) }

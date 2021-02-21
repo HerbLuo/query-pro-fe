@@ -10,6 +10,8 @@ import { fixAll } from "./kotlin-ir-bugfixer";
 import QueryProJs = cloudself.cn.QueryProJs;
 import Field = cloudself.cn.query.Field;
 import QueryFieldJs = cloudself.cn.QueryFieldJs;
+import {debugLog} from "./debug-log";
+import QueryFieldType = cloudself.cn.query.QueryFieldType;
 
 type IWhereField<T> = {
     [key in keyof T]: QueryKeywords<IWhereField<T>>
@@ -31,10 +33,10 @@ type IColumnsLimiterField<T> = {
     [key in keyof T]: () => IColumnsLimiterField<T>
 } & QueryField<T, IWhereField<T>, IOrderByField<T>, IColumnLimiterField<T>, IColumnsLimiterField<T>, IFieldGenerator<T>>
 
-const createQueryField = (tableName: string, qs: QueryStructure) => {
+const createQueryField = (type: string, tableName: string, qs: QueryStructure) => {
     const queryField = new QueryFieldJs(
         qs,
-        tableName,
+        type,
         fieldGenerator(tableName),
         createWhereField(tableName),
         createOrderByField(tableName),
@@ -42,14 +44,14 @@ const createQueryField = (tableName: string, qs: QueryStructure) => {
         createColumnsFilterField(tableName),
     );
     (queryField as any).run = () => {
-        console.log(queryField);
-        console.log((queryField as any)._queryStructure);
+        // console.log(queryField);
+        debugLog((queryField as any)._queryStructure);
     }
     return queryField;
 }
 
 const createWhereField = (tableName: string) => <T>(qs: QueryStructure): IWhereField<T> => {
-    return new Proxy(createQueryField(tableName, qs) as IWhereField<T>, {
+    return new Proxy(createQueryField(QueryFieldType.WHERE_FIELD, tableName, qs) as any, {
         get(target: any, p: string): any {
             if (target[p]) {
                 return target[p];
@@ -60,7 +62,7 @@ const createWhereField = (tableName: string) => <T>(qs: QueryStructure): IWhereF
 }
 
 const createOrderByField = (tableName: string) => <T>(qs: QueryStructure): IOrderByField<T> => {
-    return new Proxy(createQueryField(tableName, qs) as IOrderByField<T>, {
+    return new Proxy(createQueryField(QueryFieldType.ORDER_BY_FIELD, tableName, qs) as any, {
         get(target: any, p: string) {
             if (target[p]) {
                 return target[p];
@@ -89,19 +91,28 @@ const fieldGenerator = (tableName: string) => <T>(): IFieldGenerator<T> => {
     return field;
 }
 
-const createColumnFilterField = (tableName: string) => (qs: QueryStructure) => {
-
+const createColumnFilterField = (tableName: string) => <T>(qs: QueryStructure): IColumnLimiterField<T> => {
+  return new Proxy(createQueryField(QueryFieldType.OTHER_FIELD, tableName, qs) as any, {
+      get(target: QueryFieldJs<any, any, any, any, any, any>, p: PropertyKey, receiver: any): any {
+          return (target as any).getColumn();
+      }
+  });
 }
 
-const createColumnsFilterField = (tableName: string) => (qs: QueryStructure) => {
-
+const createColumnsFilterField = (tableName: string) => <T>(qs: QueryStructure): IColumnsLimiterField<T> => {
+  return new Proxy(createQueryField(QueryFieldType.OTHER_FIELD, tableName, qs) as any, {
+      get(target: any, p: string): any {
+          const newQs: any = {fields: [...qs.fields, new Field(tableName, p)], prototype: qs};
+          return createColumnsFilterField(tableName)(newQs);
+      }
+  })
 }
 
 export class QueryPro<T> extends QueryProJs<QueryPro<T>, IWhereField<T>, IOrderByField<T>, IFieldGenerator<T>> {
     private readonly tableName: string;
     constructor(tableNameOrQs: string | QueryStructure) {
         let tableName: string;
-        let queryStructure: QueryStructure | null = null;
+        let queryStructure: QueryStructure | null;
         if (typeof tableNameOrQs === "string") {
             tableName = tableNameOrQs
             queryStructure = new QueryStructure(

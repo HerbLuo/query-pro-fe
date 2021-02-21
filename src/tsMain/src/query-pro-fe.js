@@ -33,10 +33,6 @@
   IndexOutOfBoundsException.prototype.constructor = IndexOutOfBoundsException;
   ClassCastException.prototype = Object.create(RuntimeException.prototype);
   ClassCastException.prototype.constructor = ClassCastException;
-  WHERE_FIELD.prototype = Object.create(QueryFieldType.prototype);
-  WHERE_FIELD.prototype.constructor = WHERE_FIELD;
-  ORDER_BY_FIELD.prototype = Object.create(QueryFieldType.prototype);
-  ORDER_BY_FIELD.prototype.constructor = ORDER_BY_FIELD;
   QueryField.prototype = Object.create(FinalQueryField.prototype);
   QueryField.prototype.constructor = QueryField;
   QueryFieldJs.prototype = Object.create(QueryField.prototype);
@@ -151,7 +147,7 @@
   function AbstractCollection() {
   }
   AbstractCollection.prototype.isEmpty_4 = function () {
-    return this._get_size__4() === 0;
+    return this._get_size__5() === 0;
   };
   AbstractCollection.prototype.toString = function () {
     return joinToString$default_0(this, ', ', '[', ']', 0, null, _no_name_provided_$factory(this), 24, null);
@@ -194,7 +190,7 @@
     return hashCode_0;
   };
   Companion_0.prototype.orderedEquals = function (c, other) {
-    if (!(c._get_size__4() === other._get_size__4()))
+    if (!(c._get_size__5() === other._get_size__5()))
       return false;
     var otherIterator = other.iterator_14();
     var tmp0_iterator = c.iterator_14();
@@ -224,7 +220,7 @@
     this._values = values;
     this._isVarargs = isVarargs;
   }
-  ArrayAsCollection.prototype._get_size__4 = function () {
+  ArrayAsCollection.prototype._get_size__5 = function () {
     return this._values.length;
   };
   ArrayAsCollection.prototype.isEmpty_4 = function () {
@@ -373,7 +369,7 @@
     this._last = -1;
   }
   IteratorImpl.prototype.hasNext_1 = function () {
-    return this._index < this._$this._get_size__4();
+    return this._index < this._$this._get_size__5();
   };
   IteratorImpl.prototype.next_1 = function () {
     if (!this.hasNext_1())
@@ -383,7 +379,7 @@
     var tmp1 = tmp0_this._index;
     tmp0_this._index = tmp1 + 1 | 0;
     tmp._last = tmp1;
-    return this._$this.get_10(this._last);
+    return this._$this.get_11(this._last);
   };
   IteratorImpl.$metadata$ = {
     simpleName: 'IteratorImpl',
@@ -402,7 +398,7 @@
   };
   AbstractMutableList.prototype.add_4 = function (element) {
     this.checkIsMutable_1();
-    this.add_3(this._get_size__4(), element);
+    this.add_3(this._get_size__5(), element);
     return true;
   };
   AbstractMutableList.prototype.iterator_14 = function () {
@@ -440,11 +436,11 @@
     return ArrayList_init_$Init$_0(elements, Object.create(ArrayList.prototype));
   }
   function rangeCheck($this, index) {
-    Companion_getInstance().checkElementIndex(index, $this._get_size__4());
+    Companion_getInstance().checkElementIndex(index, $this._get_size__5());
     return index;
   }
   function insertionRangeCheck($this, index) {
-    Companion_getInstance().checkPositionIndex(index, $this._get_size__4());
+    Companion_getInstance().checkPositionIndex(index, $this._get_size__5());
     return index;
   }
   function ArrayList(array) {
@@ -452,10 +448,10 @@
     this._array = array;
     this._isReadOnly = false;
   }
-  ArrayList.prototype._get_size__4 = function () {
+  ArrayList.prototype._get_size__5 = function () {
     return this._array.length;
   };
-  ArrayList.prototype.get_10 = function (index) {
+  ArrayList.prototype.get_11 = function (index) {
     var tmp = this._array[rangeCheck(this, index)];
     return (tmp == null ? true : isObject(tmp)) ? tmp : THROW_CCE();
   };
@@ -2028,43 +2024,44 @@
     var tmp0_unsafeCast_0 = lhs_hack & rhs_hack;
     return tmp0_unsafeCast_0;
   }
-  function WHERE_FIELD() {
-    WHERE_FIELD_instance = this;
-    QueryFieldType.call(this);
-  }
-  WHERE_FIELD.$metadata$ = {
-    simpleName: 'WHERE_FIELD',
-    kind: 'object',
-    interfaces: []
-  };
-  var WHERE_FIELD_instance;
-  function WHERE_FIELD_getInstance() {
-    if (WHERE_FIELD_instance == null)
-      new WHERE_FIELD();
-    return WHERE_FIELD_instance;
-  }
-  function ORDER_BY_FIELD() {
-    ORDER_BY_FIELD_instance = this;
-    QueryFieldType.call(this);
-  }
-  ORDER_BY_FIELD.$metadata$ = {
-    simpleName: 'ORDER_BY_FIELD',
-    kind: 'object',
-    interfaces: []
-  };
-  var ORDER_BY_FIELD_instance;
-  function ORDER_BY_FIELD_getInstance() {
-    if (ORDER_BY_FIELD_instance == null)
-      new ORDER_BY_FIELD();
-    return ORDER_BY_FIELD_instance;
-  }
   function QueryFieldType() {
+    QueryFieldType_instance = this;
+    this._WHERE_FIELD = 'WHERE_FIELD';
+    this._ORDER_BY_FIELD = 'ORDER_BY_FIELD';
+    this._OTHER_FIELD = 'OTHER_FIELD';
   }
+  QueryFieldType.prototype._get_WHERE_FIELD_ = function () {
+    return this._WHERE_FIELD;
+  };
+  QueryFieldType.prototype._get_ORDER_BY_FIELD_ = function () {
+    return this._ORDER_BY_FIELD;
+  };
+  QueryFieldType.prototype._get_OTHER_FIELD_ = function () {
+    return this._OTHER_FIELD;
+  };
   QueryFieldType.$metadata$ = {
     simpleName: 'QueryFieldType',
-    kind: 'class',
+    kind: 'object',
     interfaces: []
   };
+  Object.defineProperty(QueryFieldType.prototype, 'WHERE_FIELD', {
+    configurable: true,
+    get: QueryFieldType.prototype._get_WHERE_FIELD_
+  });
+  Object.defineProperty(QueryFieldType.prototype, 'ORDER_BY_FIELD', {
+    configurable: true,
+    get: QueryFieldType.prototype._get_ORDER_BY_FIELD_
+  });
+  Object.defineProperty(QueryFieldType.prototype, 'OTHER_FIELD', {
+    configurable: true,
+    get: QueryFieldType.prototype._get_OTHER_FIELD_
+  });
+  var QueryFieldType_instance;
+  function QueryFieldType_getInstance() {
+    if (QueryFieldType_instance == null)
+      new QueryFieldType();
+    return QueryFieldType_instance;
+  }
   function IFieldGenerator() {
   }
   IFieldGenerator.$metadata$ = {
@@ -2095,7 +2092,18 @@
       tmp0_mapTo_0_1.add_4(access(isObject(item_2_3) ? item_2_3 : THROW_CCE(), field._column));
       Unit_getInstance();
     }
-    return tmp0_mapTo_0_1;
+    var res = tmp0_mapTo_0_1;
+    var tmp_0 = 0;
+    var tmp_1 = res._get_size__5();
+    var tmp_2 = fillArrayVal(Array(tmp_1), null);
+    while (tmp_0 < tmp_1) {
+      var tmp_3 = tmp_0;
+      var tmp_4 = res.get_11(tmp_3);
+      tmp_2[tmp_3] = isObject(tmp_4) ? tmp_4 : THROW_CCE();
+      tmp_0 = tmp_0 + 1 | 0;
+    }
+    var tmp_5 = tmp_2;
+    return isArray(tmp_5) ? tmp_5 : THROW_CCE();
   };
   FinalQueryField.prototype.columnsLimiter_1 = function () {
     return this._get_createColumnsLimiterField__1()(this._queryStructure);
@@ -2152,12 +2160,12 @@
     return new QueryKeywords(Field_init_$Create$(null, column, 1, null), this._queryStructure_0, this._get_createWhereField__2());
   };
   QueryField.prototype.and_0 = function () {
-    if (!equals(this._get_type__0(), WHERE_FIELD_getInstance())) {
+    if (!(this._get_type__0() === 'WHERE_FIELD')) {
       throw RuntimeException_init_$Create$('' + this._get_type__0() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
     }return this instanceof QueryField ? this : THROW_CCE();
   };
   QueryField.prototype.or_0 = function (factor) {
-    if (!equals(this._get_type__0(), WHERE_FIELD_getInstance())) {
+    if (!(this._get_type__0() === 'WHERE_FIELD')) {
       throw RuntimeException_init_$Create$('' + this._get_type__0() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
     }if (factor == null) {
       var tmp = this._get_createWhereField__2();
@@ -2254,7 +2262,7 @@
   QueryKeywords.prototype.like_1 = function (str) {
     return with_0(this, new WhereClause(this._field, 'like', str));
   };
-  QueryKeywords.prototype.iN = function (values) {
+  QueryKeywords.prototype.in_1 = function (values) {
     return with_0(this, new WhereClause(this._field, 'in', values));
   };
   QueryKeywords.prototype.nul_0 = function () {
@@ -2304,7 +2312,7 @@
   QueryWithNotKeywords.prototype.like_1 = function (str) {
     return with_1(this, new WhereClause(this._field_0, 'not like', str));
   };
-  QueryWithNotKeywords.prototype.iN = function (values) {
+  QueryWithNotKeywords.prototype.in_1 = function (values) {
     return with_1(this, new WhereClause(this._field_0, 'not in', values));
   };
   QueryWithNotKeywords.prototype.nul_0 = function () {
@@ -2335,7 +2343,7 @@
   QueryIgnoreCaseKeywords.prototype.like_1 = function (str) {
     return with_2(this, new WhereClause(upperField(this, this._field_1), 'like', '' + 'upper(' + str + ')'));
   };
-  QueryIgnoreCaseKeywords.prototype.iN = function (values) {
+  QueryIgnoreCaseKeywords.prototype.in_1 = function (values) {
     var tmp = upperField(this, this._field_1);
     var tmp0_mapTo_0_1 = ArrayList_init_$Create$(values.length);
     var indexedObject = values;
@@ -3011,18 +3019,18 @@
     configurable: true,
     get: FromJoiner.prototype._get_on_
   });
-  function QueryStructureFrom_init_$Init$(main_0, joins, $mask0, $marker, $this) {
+  function QueryStructureFrom_init_$Init$(main, joins, $mask0, $marker, $this) {
     if (!(($mask0 & 2) === 0)) {
       var tmp0_arrayOf_0 = [];
       joins = tmp0_arrayOf_0;
-    }QueryStructureFrom.call($this, main_0, joins);
+    }QueryStructureFrom.call($this, main, joins);
     return $this;
   }
-  function QueryStructureFrom_init_$Create$(main_0, joins, $mask0, $marker) {
-    return QueryStructureFrom_init_$Init$(main_0, joins, $mask0, $marker, Object.create(QueryStructureFrom.prototype));
+  function QueryStructureFrom_init_$Create$(main, joins, $mask0, $marker) {
+    return QueryStructureFrom_init_$Init$(main, joins, $mask0, $marker, Object.create(QueryStructureFrom.prototype));
   }
-  function QueryStructureFrom(main_0, joins) {
-    this._main = main_0;
+  function QueryStructureFrom(main, joins) {
+    this._main = main;
     this._joins = joins;
   }
   QueryStructureFrom.prototype._get_main_ = function () {
@@ -3058,15 +3066,15 @@
   QueryStructureFrom.prototype.component2_5 = function () {
     return this._joins;
   };
-  QueryStructureFrom.prototype.copy_5 = function (main_0, joins) {
-    return new QueryStructureFrom(main_0, joins);
+  QueryStructureFrom.prototype.copy_5 = function (main, joins) {
+    return new QueryStructureFrom(main, joins);
   };
-  QueryStructureFrom.prototype.copy$default_5 = function (main_0, joins, $mask0, $handler) {
+  QueryStructureFrom.prototype.copy$default_5 = function (main, joins, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
-      main_0 = this._main;
+      main = this._main;
     if (!(($mask0 & 2) === 0))
       joins = this._joins;
-    return this.copy_5(main_0, joins);
+    return this.copy_5(main, joins);
   };
   QueryStructureFrom.prototype.toString = function () {
     return '' + 'QueryStructureFrom(main=' + this._main + ', joins=' + toString_0(this._joins) + ')';
@@ -3111,6 +3119,9 @@
   QueryFieldJs.prototype._get_createColumnsLimiterField__1 = function () {
     return this._createColumnsLimiterField;
   };
+  QueryFieldJs.prototype.getColumn_1 = function (field) {
+    return QueryField.prototype.getColumn_1.call(this, field);
+  };
   QueryFieldJs.$metadata$ = {
     simpleName: 'QueryFieldJs',
     kind: 'class',
@@ -3146,16 +3157,7 @@
     var tmp = jsObj[prop];
     return (tmp == null ? true : isObject(tmp)) ? tmp : THROW_CCE();
   }
-  function main() {
-    (function () {
-      var $externalVarargReceiverTmp = console;
-      return $externalVarargReceiverTmp.log.apply($externalVarargReceiverTmp, [].concat(['' + 'Hello, ' + greet()]));
-    }.call(this));
-  }
-  function greet() {
-    return 'world';
-  }
-  AbstractMutableList.prototype.get_10 = List.prototype.get_10;
+  AbstractMutableList.prototype.get_11 = List.prototype.get_11;
   KClassImpl.prototype._get_simpleName__2 = KClass.prototype._get_simpleName__2;
   functionClasses = functionClasses$init$();
   buf = new ArrayBuffer(8);
@@ -3166,7 +3168,10 @@
   var $cloudself = _.cloudself || (_.cloudself = {});
   var $cloudself$cn = $cloudself.cn || ($cloudself.cn = {});
   var $cloudself$cn$query = $cloudself$cn.query || ($cloudself$cn.query = {});
-  $cloudself$cn$query.QueryFieldType = QueryFieldType;
+  Object.defineProperty($cloudself$cn$query, 'QueryFieldType', {
+    configurable: true,
+    get: QueryFieldType_getInstance
+  });
   $cloudself$cn$query.FinalQueryField = FinalQueryField;
   $cloudself$cn$query.QueryField = QueryField;
   $cloudself$cn$query.QueryKeywords = QueryKeywords;
@@ -3187,6 +3192,5 @@
   $cloudself$cn$query.QueryStructureFrom = QueryStructureFrom;
   $cloudself$cn.QueryFieldJs = QueryFieldJs;
   $cloudself$cn.QueryProJs = QueryProJs;
-  main();
   return _;
 }));

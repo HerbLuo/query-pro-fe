@@ -5,7 +5,6 @@ package cloudself.cn.query
 
 import cloudself.cn.types.CreateQueryField
 import kotlin.js.JsExport
-import kotlin.js.JsName
 import kotlin.jvm.JvmField
 
 class QueryKeywords<F : QueryField<*, *, *, *, *, *>>(
@@ -24,7 +23,6 @@ class QueryKeywords<F : QueryField<*, *, *, *, *, *>>(
     fun graterThan(value: Any) = with(WhereClause(field, ">", value))
     fun graterThanOrEqual(value: Any) = with(WhereClause(field, ">=", value))
     fun like(str: String) = with(WhereClause(field, "like", str))
-    @JsName("iN")
     fun `in`(vararg values: Any) = with(WhereClause(field, "in", values))
     fun nul() = with(WhereClause(field = field, operator = "is null"))
     fun isNull() = with(WhereClause(field = field, operator = "is null"))
@@ -41,7 +39,6 @@ class QueryWithNotKeywords<F : QueryField<*, *, *, *, *, *>>(
     fun equalsTo(value: Any) = with(WhereClause(field, "<>", value))
     fun between(start: Any, end: Any) = with(WhereClause(field, "not between", arrayOf(start, end)))
     fun like(str: String) = with(WhereClause(field, "not like", str))
-    @JsName("iN")
     fun `in`(vararg values: Any) = with(WhereClause(field, "not in", values))
     fun nul() = with(WhereClause(field = field, operator = "is not null"))
 
@@ -55,7 +52,6 @@ class QueryIgnoreCaseKeywords<F : QueryField<*, *, *, *, *, *>>(
 ) {
     fun equalsTo(value: Any) = with(WhereClause(upperField(field), "=", "upper($value)"))
     fun like(str: String) = with(WhereClause(upperField(field), "like", "upper($str)"))
-    @JsName("iN")
     fun `in`(vararg values: Any) = with(WhereClause(upperField(field), "in", values.map { "upper($it)" }))
 
     private fun upperField(field: Field) = Field(column = "upper(${field.table}.${field.column})")

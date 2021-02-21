@@ -1,12 +1,10 @@
 type Nullable<T> = T | null | undefined
 export namespace cloudself.cn.query {
-    class QueryFieldType {
-        private constructor();
-        readonly WHERE_FIELD: {
-        } & cloudself.cn.query.QueryFieldType;
-        readonly ORDER_BY_FIELD: {
-        } & cloudself.cn.query.QueryFieldType;
-    }
+    const QueryFieldType: {
+        readonly WHERE_FIELD: string;
+        readonly ORDER_BY_FIELD: string;
+        readonly OTHER_FIELD: string;
+    };
     interface IFieldGenerator {
         _getFields(): Array<cloudself.cn.query.Field>;
         _getTableName(): string;
@@ -24,7 +22,7 @@ export namespace cloudself.cn.query {
         constructor(queryStructure: cloudself.cn.query.QueryStructure);
         customColumn(column: string): cloudself.cn.query.QueryKeywords<WHERE_FIELD>;
         and(): WHERE_FIELD;
-        or(factor: Nullable<(p0: WHERE_FIELD) => WHERE_FIELD>): WHERE_FIELD;
+        or(factor?: Nullable<(p0: WHERE_FIELD) => WHERE_FIELD>): WHERE_FIELD;
         andForeignField(fields: Array<cloudself.cn.query.QueryField<any /*UnknownType **/, any /*UnknownType **/, any /*UnknownType **/, any /*UnknownType **/, any /*UnknownType **/, any /*UnknownType **/>>): WHERE_FIELD;
         orderBy(): ORDER_BY_FIELD;
     }
@@ -42,7 +40,7 @@ export namespace cloudself.cn.query {
         graterThan(value: any): F;
         graterThanOrEqual(value: any): F;
         like(str: string): F;
-        iN(values: Array<any>): F;
+        in(...values: any[]): F;
         nul(): F;
         isNull(): F;
         isNotNull(): F;
@@ -52,14 +50,14 @@ export namespace cloudself.cn.query {
         equalsTo(value: any): F;
         between(start: any, end: any): F;
         like(str: string): F;
-        iN(values: Array<any>): F;
+        in(...values: any[]): F;
         nul(): F;
     }
     class QueryIgnoreCaseKeywords<F> {
         constructor(field: cloudself.cn.query.Field, queryStructure: cloudself.cn.query.QueryStructure, createQueryField: (p0: cloudself.cn.query.QueryStructure) => F);
         equalsTo(value: any): F;
         like(str: string): F;
-        iN(values: Array<any>): F;
+        in(...values: any[]): F;
     }
     class QueryOrderByKeywords<F> {
         constructor(field: cloudself.cn.query.Field, queryStructure: cloudself.cn.query.QueryStructure, createQueryField: (p0: cloudself.cn.query.QueryStructure) => F);
@@ -186,7 +184,8 @@ export namespace cloudself.cn.query {
 }
 export namespace cloudself.cn {
     class QueryFieldJs<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR> extends cloudself.cn.query.QueryField<T, WHERE_FIELD, ORDER_BY_FIELD, COLUMN_LIMITER_FILED, COLUMNS_LIMITER_FILED, FIELD_GENERATOR> {
-        constructor(queryStructure: cloudself.cn.query.QueryStructure, type: typeof cloudself.cn.query.QueryFieldType.WHERE_FIELD, fieldGenerator: () => FIELD_GENERATOR, createWhereField: (p0: cloudself.cn.query.QueryStructure) => WHERE_FIELD, createOrderByField: (p0: cloudself.cn.query.QueryStructure) => ORDER_BY_FIELD, createColumnLimiterField: (p0: cloudself.cn.query.QueryStructure) => COLUMN_LIMITER_FILED, createColumnsLimiterField: (p0: cloudself.cn.query.QueryStructure) => COLUMNS_LIMITER_FILED);
+        constructor(queryStructure: cloudself.cn.query.QueryStructure, type: string, fieldGenerator: () => FIELD_GENERATOR, createWhereField: (p0: cloudself.cn.query.QueryStructure) => WHERE_FIELD, createOrderByField: (p0: cloudself.cn.query.QueryStructure) => ORDER_BY_FIELD, createColumnLimiterField: (p0: cloudself.cn.query.QueryStructure) => COLUMN_LIMITER_FILED, createColumnsLimiterField: (p0: cloudself.cn.query.QueryStructure) => COLUMNS_LIMITER_FILED);
+        getColumn<T>(field: cloudself.cn.query.Field): Array<T>;
     }
 }
 export namespace cloudself.cn {

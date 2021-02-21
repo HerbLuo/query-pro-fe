@@ -3,11 +3,16 @@
   "version": "1.0.0",
   "main": "main.ts",
   "scripts": {
-    "start": "ts-node test/query-pros.ts"
+    "fix": "ts-node ./kotlin-ir-ts-bugfixer.ts",
+    "start": "ts-node test/query-pros.test.ts",
+    "test": "jest --silent=false --verbose false"
   },
   "author": "hb",
   "license": "MIT",
-  "dependencies": {
+  "devDependencies": {
+    "@types/jest": "^26.0.20",
+    "jest": "^26.6.3",
+    "ts-jest": "^26.5.1",
     "ts-node": "^9.1.1",
     "typescript": "^4.1.5"
   }
