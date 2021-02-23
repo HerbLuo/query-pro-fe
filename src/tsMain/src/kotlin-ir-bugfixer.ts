@@ -35,13 +35,21 @@ export function fixAll() {
 }
 
 export function stringifyKtDataObj(obj: {}): string {
-    const remove_ = (obj: {}) => {
+    const remove_ = (obj: any): any => {
+        if (obj === null || obj === undefined || typeof obj === "string" ||
+            typeof obj === "number" || typeof obj === "boolean"
+        ) {
+            return obj;
+        }
+        if (obj instanceof Array) {
+            return obj.map(it => remove_(it));
+        }
         const newObj = {};
         for (const oldKey of Object.keys(obj)) {
             if (!oldKey.startsWith("_")) {
                 continue;
             }
-            const key = oldKey.substring(1);
+            const key = oldKey.split("_")[1];
             const val = (obj as any)[key];
             if (val !== null && val !== undefined && typeof val === "object") {
                 (newObj as any)[key] = remove_(val);
