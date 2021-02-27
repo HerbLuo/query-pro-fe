@@ -6,11 +6,10 @@ import QueryStructureFrom = cloudself.cn.query.QueryStructureFrom;
 import QueryKeywords = cloudself.cn.query.QueryKeywords;
 import QueryOrderByKeywords = cloudself.cn.query.QueryOrderByKeywords;
 import IIFieldGenerator = cloudself.cn.query.IFieldGenerator;
-import {access, fixAll, fixOverride, mergeObj} from "./kotlin-ir-bugfixer";
+import {access, fixAll, fixOverride} from "./kotlin-ir-bugfixer";
 import QueryProJs = cloudself.cn.QueryProJs;
 import Field = cloudself.cn.query.Field;
 import QueryFieldJs = cloudself.cn.QueryFieldJs;
-import {debugLog} from "./debug-log";
 import QueryFieldType = cloudself.cn.query.QueryFieldType;
 import FinalQueryField = cloudself.cn.query.FinalQueryField;
 
@@ -38,7 +37,7 @@ export interface QueryAdapter {
     <T>(queryStructure: QueryStructure): Promise<T>;
 }
 
-let defQueryAdapter: QueryAdapter = (queryStructure: QueryStructure) => {
+let defQueryAdapter: QueryAdapter = () => {
     return Promise.reject("unimpl")
 }
 
