@@ -34,30 +34,77 @@ export function fixAll() {
     debugLog("all fixed\n");
 }
 
-export function stringifyKtDataObj(obj: {}): string {
-    const remove_ = (obj: any): any => {
-        if (obj === null || obj === undefined || typeof obj === "string" ||
-            typeof obj === "number" || typeof obj === "boolean"
-        ) {
-            return obj;
+export function fixOverride(proto: any, key: string, value: any) {
+    for (const k of Object.keys(proto)) {
+        if (k.startsWith(key)) {
+            proto[k] = value;
         }
-        if (obj instanceof Array) {
-            return obj.map(it => remove_(it));
-        }
-        const newObj = {};
-        for (const oldKey of Object.keys(obj)) {
-            if (!oldKey.startsWith("_")) {
-                continue;
-            }
-            const key = oldKey.split("_")[1];
-            const val = (obj as any)[key];
-            if (val !== null && val !== undefined && typeof val === "object") {
-                (newObj as any)[key] = remove_(val);
-            } else {
-                (newObj as any)[key] = val;
-            }
-        }
-        return newObj;
     }
+}
+
+export function access<T, K extends keyof T>(obj: T, key: K): T[K] {
+    const val = obj[key];
+    if (val) {
+        return val;
+    }
+    return (obj as any)["_" + key];
+}
+
+export function mergeObj<A, B>(oldObj: A, newObj: B): A & B {
+    return {...remove_(oldObj), ...remove_(newObj)} as any;
+}
+
+const KtClasses: any[] = [];
+function resolvePackage(pkg: any) {
+    if (!pkg) {
+        return;
+    }
+    for (const clazzOrPackage of Object.values(pkg)) {
+        if ((clazzOrPackage as any)["$metadata$"]) {
+            KtClasses.push((clazzOrPackage as any).prototype)
+        } else {
+            resolvePackage(clazzOrPackage);
+        }
+    }
+}
+resolvePackage(cloudself.cn);
+
+const remove_ = (obj: any): any => {
+    if (obj === null || obj === undefined || typeof obj === "string" ||
+        typeof obj === "number" || typeof obj === "boolean"
+    ) {
+        return obj;
+    }
+    if (obj instanceof Array) {
+        return obj.map(it => remove_(it));
+    }
+
+    const proto = Reflect.getPrototypeOf(obj);
+    if (!proto) {
+        return obj;
+    }
+
+    const areKtClass = KtClasses.includes(proto);
+    const keys = Object.entries(Object.getOwnPropertyDescriptors(proto))
+        .filter(([k, d]) => {
+            if (k === "constructor") {
+                return false;
+            }
+            return d.enumerable === !areKtClass;
+        }).map(([k]) => k);
+
+    const newObj: Record<string, unknown> = {};
+    for (const key of keys) {
+        const val = (obj as any)[key];
+        if (val !== null && val !== undefined && typeof val === "object") {
+            newObj[key] = remove_(val);
+        } else {
+            newObj[key] = val;
+        }
+    }
+    return newObj;
+}
+
+export function stringifyKtDataObj(obj: {}): string {
     return JSON.stringify(remove_(obj));
 }

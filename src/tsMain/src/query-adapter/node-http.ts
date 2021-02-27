@@ -10,7 +10,7 @@ export const createNodeHttpQueryAdapter = (
 ): QueryAdapter => {
     return (queryStructure: QueryStructure) => {
         const qsJson = stringifyKtDataObj(queryStructure);
-        debugLog(qsJson);
+        // console.log(qsJson);
         return fetch(url, {
             method: "POST",
             body: qsJson,

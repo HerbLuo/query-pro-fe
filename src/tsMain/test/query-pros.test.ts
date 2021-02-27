@@ -14,10 +14,11 @@ test("selectBy", async () => {
 });
 
 test("selectBy equals", async () => {
-    UserQueryPro.selectBy().uid.equalsTo(1).run();
-    UserSettingQueryPro.selectBy().uid.equalsTo(1).run();
-    UserQueryPro.selectBy().uid.equalsTo(1).score.equalsTo(2).run();
-    UserQueryPro.selectBy().uid.equalsTo(1).and().score.equalsTo(2).run();
+    const rows1 = await UserQueryPro.selectBy().uid.equalsTo(1).run();
+    console.log(rows1);
+    await UserSettingQueryPro.selectBy().uid.equalsTo(1).run();
+    await UserQueryPro.selectBy().uid.equalsTo(1).score.equalsTo(2.2).run();
+    await UserQueryPro.selectBy().uid.equalsTo(1).and().score.equalsTo('2.3').run();
 });
 
 test("selectBy null", async () => {
@@ -65,11 +66,13 @@ test("orderBy", async () => {
 });
 
 test("column limiter", async () => {
-    UserSettingQueryPro.selectBy().uid.equalsTo(1).columnLimiter().kee();
+    const rows1 = await UserSettingQueryPro.selectBy().uid.equalsTo(1).columnLimiter().kee();
+    console.log(rows1);
 });
 
 test("columns limiter", async () => {
-    UserSettingQueryPro.selectBy().kee.equalsTo("").columnsLimiter().kee().value();
+    const rows1 = await UserSettingQueryPro.selectBy().kee.equalsTo("22").columnsLimiter().kee().value().run();
+    console.log(rows1);
 });
 
 test("misc", async () => {

@@ -6,12 +6,13 @@ import QueryStructureFrom = cloudself.cn.query.QueryStructureFrom;
 import QueryKeywords = cloudself.cn.query.QueryKeywords;
 import QueryOrderByKeywords = cloudself.cn.query.QueryOrderByKeywords;
 import IIFieldGenerator = cloudself.cn.query.IFieldGenerator;
-import { fixAll } from "./kotlin-ir-bugfixer";
+import {access, fixAll, fixOverride, mergeObj} from "./kotlin-ir-bugfixer";
 import QueryProJs = cloudself.cn.QueryProJs;
 import Field = cloudself.cn.query.Field;
 import QueryFieldJs = cloudself.cn.QueryFieldJs;
 import {debugLog} from "./debug-log";
 import QueryFieldType = cloudself.cn.query.QueryFieldType;
+import FinalQueryField = cloudself.cn.query.FinalQueryField;
 
 type IWhereField<T> = {
     [key in keyof T]: QueryKeywords<IWhereField<T>>
@@ -26,7 +27,7 @@ type IFieldGenerator<T> = {
 } & IIFieldGenerator;
 
 type IColumnLimiterField<T> = {
-    [key in keyof T]: () => T[key]
+    [key in keyof T]: () => T[key][]
 }
 
 type IColumnsLimiterField<T> = {
@@ -55,11 +56,13 @@ const createQueryField = (type: string, tableName: string, qs: QueryStructure) =
         createColumnFilterField(tableName),
         createColumnsFilterField(tableName),
     );
-    (queryField as any).run = () => {
+    const run = () => {
         const queryStructure: QueryStructure = (queryField as any)._queryStructure;
-        debugLog((queryField as any)._queryStructure);
+        // console.log((queryField as any)._queryStructure);
         return defQueryAdapter(queryStructure);
-    }
+    };
+    (queryField as any).run = run;
+    fixOverride(FinalQueryField.prototype, "run", run);
     return queryField;
 }
 
@@ -115,7 +118,11 @@ const createColumnFilterField = (tableName: string) => <T>(qs: QueryStructure): 
 const createColumnsFilterField = (tableName: string) => <T>(qs: QueryStructure): IColumnsLimiterField<T> => {
   return new Proxy(createQueryField(QueryFieldType.OTHER_FIELD, tableName, qs) as any, {
       get(target: any, p: string): any {
-          const newQs: any = {fields: [...qs.fields, new Field(tableName, p)], prototype: qs};
+          if (target[p]) {
+              return target[p];
+          }
+          const fields = [...access(qs, "fields"), new Field(tableName, p)];
+          const newQs = new QueryStructure(qs.action, fields, qs.from, qs.where, qs.orderBy, qs.limit);
           return () => createColumnsFilterField(tableName)(newQs);
       }
   })
