@@ -69,7 +69,12 @@ data class FromJoinerOn(
     val right: Field,
 )
 
+object JoinType {
+    const val LEFT_JOIN = "LEFT_JOIN"
+}
+
 data class FromJoiner(
+    val type: String,
     val table: String,
     val on: Array<FromJoinerOn>,
 ) {

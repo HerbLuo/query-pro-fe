@@ -22,7 +22,18 @@ function namerFixer(proto: Record<string, any>) {
     }
 }
 
+export function fixVarArgFunc(obj: any, prop: string) {
+    const oldFunc = obj[prop];
+    obj[prop] = function (...args: any[]) {
+        return oldFunc.call(this, args);
+    }
+}
+
+let run = false;
 export function fixAll() {
+    if (run) {
+        return;
+    }
     namerFixer(QueryProImpl.prototype);
     namerFixer(FinalQueryField.prototype);
     namerFixer(QueryField.prototype);
@@ -31,12 +42,16 @@ export function fixAll() {
     namerFixer(QueryWithNotKeywords.prototype);
     namerFixer(QueryIgnoreCaseKeywords.prototype);
     namerFixer(QueryOrderByKeywords.prototype);
+
+    fixVarArgFunc(QueryKeywords.prototype, "in");
+    fixVarArgFunc(QueryWithNotKeywords.prototype, "in");
     debugLog("all fixed\n");
+    run = true;
 }
 
 export function fixOverride(proto: any, key: string, value: any) {
     for (const k of Object.keys(proto)) {
-        if (k.startsWith(key)) {
+        if (k.startsWith(key + "_")) {
             proto[k] = value;
         }
     }

@@ -137,7 +137,7 @@
   _no_name_provided_.prototype.invoke = function (it) {
     return it === this._this$0 ? '(this Collection)' : toString(it);
   };
-  _no_name_provided_.prototype.invoke_44 = function (p1) {
+  _no_name_provided_.prototype.invoke_46 = function (p1) {
     return this.invoke((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided_.$metadata$ = {
@@ -636,7 +636,7 @@
   _no_name_provided__0.prototype.invoke_41 = function (it) {
     return isObject(it);
   };
-  _no_name_provided__0.prototype.invoke_44 = function (p1) {
+  _no_name_provided__0.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__0.$metadata$ = {
@@ -648,7 +648,7 @@
   _no_name_provided__1.prototype.invoke_41 = function (it) {
     return isNumber(it);
   };
-  _no_name_provided__1.prototype.invoke_44 = function (p1) {
+  _no_name_provided__1.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__1.$metadata$ = {
@@ -660,7 +660,7 @@
   _no_name_provided__2.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'boolean' : false;
   };
-  _no_name_provided__2.prototype.invoke_44 = function (p1) {
+  _no_name_provided__2.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__2.$metadata$ = {
@@ -672,7 +672,7 @@
   _no_name_provided__3.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__3.prototype.invoke_44 = function (p1) {
+  _no_name_provided__3.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__3.$metadata$ = {
@@ -684,7 +684,7 @@
   _no_name_provided__4.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__4.prototype.invoke_44 = function (p1) {
+  _no_name_provided__4.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__4.$metadata$ = {
@@ -696,7 +696,7 @@
   _no_name_provided__5.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__5.prototype.invoke_44 = function (p1) {
+  _no_name_provided__5.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__5.$metadata$ = {
@@ -708,7 +708,7 @@
   _no_name_provided__6.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__6.prototype.invoke_44 = function (p1) {
+  _no_name_provided__6.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__6.$metadata$ = {
@@ -720,7 +720,7 @@
   _no_name_provided__7.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'number' : false;
   };
-  _no_name_provided__7.prototype.invoke_44 = function (p1) {
+  _no_name_provided__7.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__7.$metadata$ = {
@@ -732,7 +732,7 @@
   _no_name_provided__8.prototype.invoke_41 = function (it) {
     return !(it == null) ? isArray(it) : false;
   };
-  _no_name_provided__8.prototype.invoke_44 = function (p1) {
+  _no_name_provided__8.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__8.$metadata$ = {
@@ -744,7 +744,7 @@
   _no_name_provided__9.prototype.invoke_41 = function (it) {
     return !(it == null) ? typeof it === 'string' : false;
   };
-  _no_name_provided__9.prototype.invoke_44 = function (p1) {
+  _no_name_provided__9.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__9.$metadata$ = {
@@ -756,7 +756,7 @@
   _no_name_provided__10.prototype.invoke_41 = function (it) {
     return it instanceof Error;
   };
-  _no_name_provided__10.prototype.invoke_44 = function (p1) {
+  _no_name_provided__10.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__10.$metadata$ = {
@@ -768,7 +768,7 @@
   _no_name_provided__11.prototype.invoke_41 = function (it) {
     return !(it == null) ? isBooleanArray(it) : false;
   };
-  _no_name_provided__11.prototype.invoke_44 = function (p1) {
+  _no_name_provided__11.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__11.$metadata$ = {
@@ -780,7 +780,7 @@
   _no_name_provided__12.prototype.invoke_41 = function (it) {
     return !(it == null) ? isCharArray(it) : false;
   };
-  _no_name_provided__12.prototype.invoke_44 = function (p1) {
+  _no_name_provided__12.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__12.$metadata$ = {
@@ -792,7 +792,7 @@
   _no_name_provided__13.prototype.invoke_41 = function (it) {
     return !(it == null) ? isByteArray(it) : false;
   };
-  _no_name_provided__13.prototype.invoke_44 = function (p1) {
+  _no_name_provided__13.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__13.$metadata$ = {
@@ -804,7 +804,7 @@
   _no_name_provided__14.prototype.invoke_41 = function (it) {
     return !(it == null) ? isShortArray(it) : false;
   };
-  _no_name_provided__14.prototype.invoke_44 = function (p1) {
+  _no_name_provided__14.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__14.$metadata$ = {
@@ -816,7 +816,7 @@
   _no_name_provided__15.prototype.invoke_41 = function (it) {
     return !(it == null) ? isIntArray(it) : false;
   };
-  _no_name_provided__15.prototype.invoke_44 = function (p1) {
+  _no_name_provided__15.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__15.$metadata$ = {
@@ -828,7 +828,7 @@
   _no_name_provided__16.prototype.invoke_41 = function (it) {
     return !(it == null) ? isLongArray(it) : false;
   };
-  _no_name_provided__16.prototype.invoke_44 = function (p1) {
+  _no_name_provided__16.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__16.$metadata$ = {
@@ -840,7 +840,7 @@
   _no_name_provided__17.prototype.invoke_41 = function (it) {
     return !(it == null) ? isFloatArray(it) : false;
   };
-  _no_name_provided__17.prototype.invoke_44 = function (p1) {
+  _no_name_provided__17.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__17.$metadata$ = {
@@ -852,7 +852,7 @@
   _no_name_provided__18.prototype.invoke_41 = function (it) {
     return !(it == null) ? isDoubleArray(it) : false;
   };
-  _no_name_provided__18.prototype.invoke_44 = function (p1) {
+  _no_name_provided__18.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__18.$metadata$ = {
@@ -871,7 +871,7 @@
     }
     return tmp;
   };
-  _no_name_provided__19.prototype.invoke_44 = function (p1) {
+  _no_name_provided__19.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__19.$metadata$ = {
@@ -1580,7 +1580,7 @@
   _no_name_provided__21.prototype.invoke_41 = function (it) {
     return toString_0(it);
   };
-  _no_name_provided__21.prototype.invoke_44 = function (p1) {
+  _no_name_provided__21.prototype.invoke_46 = function (p1) {
     return this.invoke_41((p1 == null ? true : isObject(p1)) ? p1 : THROW_CCE());
   };
   _no_name_provided__21.$metadata$ = {
@@ -2069,6 +2069,26 @@
     kind: 'interface',
     interfaces: []
   };
+  function _no_name_provided__22() {
+  }
+  _no_name_provided__22.prototype.invoke_43 = function (it) {
+    var tmp;
+    if (it.length === 0) {
+      tmp = null;
+    } else {
+      {
+        tmp = it[0];
+      }
+    }
+    return tmp;
+  };
+  _no_name_provided__22.prototype.invoke_46 = function (p1) {
+    return this.invoke_43((!(p1 == null) ? isArray(p1) : false) ? p1 : THROW_CCE());
+  };
+  _no_name_provided__22.$metadata$ = {
+    kind: 'class',
+    interfaces: []
+  };
   function FinalQueryField(queryStructure) {
     this._queryStructure = queryStructure;
   }
@@ -2113,12 +2133,8 @@
   };
   FinalQueryField.prototype.runLimit1_1 = function () {
     var tmp = this._get_createField__1();
-    var results = tmp(this._queryStructure.copy$default(null, null, null, null, null, 1, 31, null)).run_1();
-    if (results.length === 0) {
-      return null;
-    } else {
-    }
-    return results[0];
+    var resultsP = tmp(this._queryStructure.copy$default(null, null, null, null, null, 1, 31, null)).run_1();
+    return jsThen(resultsP, _no_name_provided_$factory_21());
   };
   FinalQueryField.prototype.run_1 = function () {
     var tmp = [];
@@ -2131,16 +2147,16 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided__22(this$0) {
+  function _no_name_provided__23(this$0) {
     this._this$0_0 = this$0;
   }
-  _no_name_provided__22.prototype.invoke_43 = function (qs) {
+  _no_name_provided__23.prototype.invoke_45 = function (qs) {
     return this._this$0_0._get_createWhereField__2()(qs);
   };
-  _no_name_provided__22.prototype.invoke_44 = function (p1) {
-    return this.invoke_43(p1 instanceof QueryStructure ? p1 : THROW_CCE());
+  _no_name_provided__23.prototype.invoke_46 = function (p1) {
+    return this.invoke_45(p1 instanceof QueryStructure ? p1 : THROW_CCE());
   };
-  _no_name_provided__22.$metadata$ = {
+  _no_name_provided__23.$metadata$ = {
     kind: 'class',
     interfaces: []
   };
@@ -2148,7 +2164,7 @@
     FinalQueryField.call(this, queryStructure);
     this._queryStructure_0 = queryStructure;
     var tmp = this;
-    tmp._createField = _no_name_provided_$factory_21(this);
+    tmp._createField = _no_name_provided_$factory_22(this);
   }
   QueryField.prototype._get_queryStructure__0 = function () {
     return this._queryStructure_0;
@@ -2160,13 +2176,13 @@
     return new QueryKeywords(Field_init_$Create$(null, column, 1, null), this._queryStructure_0, this._get_createWhereField__2());
   };
   QueryField.prototype.and_0 = function () {
-    if (!(this._get_type__0() === 'WHERE_FIELD')) {
-      throw RuntimeException_init_$Create$('' + this._get_type__0() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
+    if (!(this._get_type__1() === 'WHERE_FIELD')) {
+      throw RuntimeException_init_$Create$('' + this._get_type__1() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
     }return this instanceof QueryField ? this : THROW_CCE();
   };
   QueryField.prototype.or_0 = function (factor) {
-    if (!(this._get_type__0() === 'WHERE_FIELD')) {
-      throw RuntimeException_init_$Create$('' + this._get_type__0() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
+    if (!(this._get_type__1() === 'WHERE_FIELD')) {
+      throw RuntimeException_init_$Create$('' + this._get_type__1() + ' can not call and, usage: .orderBy().id.desc().name.asc()');
     }if (factor == null) {
       var tmp = this._get_createWhereField__2();
       var tmp0_plus_0 = this._queryStructure_0._where;
@@ -2211,10 +2227,16 @@
     kind: 'class',
     interfaces: []
   };
-  function _no_name_provided_$factory_21(this$0) {
-    var i = new _no_name_provided__22(this$0);
+  function _no_name_provided_$factory_21() {
+    var i = new _no_name_provided__22();
     return function (p1) {
       return i.invoke_43(p1);
+    };
+  }
+  function _no_name_provided_$factory_22(this$0) {
+    var i = new _no_name_provided__23(this$0);
+    return function (p1) {
+      return i.invoke_45(p1);
     };
   }
   function with_0($this, whereClause) {
@@ -2468,7 +2490,7 @@
     }
     var foreignJoinerOn = tmp0_mapIndexedTo_0_1;
     var tmp = foreignTableName;
-    var tmp2_plus_0 = new FromJoiner(tmp, copyToArray_0(foreignJoinerOn));
+    var tmp2_plus_0 = new FromJoiner('LEFT_JOIN', tmp, copyToArray_0(foreignJoinerOn));
     var tmp0_arrayOf_0_1 = [tmp2_plus_0];
     var newJoins = oldJoins.concat(tmp0_arrayOf_0_1);
     var tmp_0 = this._get_createQuery__0();
@@ -2576,7 +2598,7 @@
   QueryStructure.prototype.component2_5 = function () {
     return this._fields;
   };
-  QueryStructure.prototype.component3_0 = function () {
+  QueryStructure.prototype.component3_1 = function () {
     return this._from;
   };
   QueryStructure.prototype.component4 = function () {
@@ -2800,7 +2822,7 @@
   WhereClause.prototype.component2_5 = function () {
     return this._operator_0;
   };
-  WhereClause.prototype.component3_0 = function () {
+  WhereClause.prototype.component3_1 = function () {
     return this._value;
   };
   WhereClause.prototype.copy_2 = function (field, operator, value) {
@@ -2956,10 +2978,36 @@
     configurable: true,
     get: FromJoinerOn.prototype._get_right_
   });
-  function FromJoiner(table, on) {
+  function JoinType() {
+    JoinType_instance = this;
+    this._LEFT_JOIN = 'LEFT_JOIN';
+  }
+  JoinType.prototype._get_LEFT_JOIN_ = function () {
+    return this._LEFT_JOIN;
+  };
+  JoinType.$metadata$ = {
+    simpleName: 'JoinType',
+    kind: 'object',
+    interfaces: []
+  };
+  Object.defineProperty(JoinType.prototype, 'LEFT_JOIN', {
+    configurable: true,
+    get: JoinType.prototype._get_LEFT_JOIN_
+  });
+  var JoinType_instance;
+  function JoinType_getInstance() {
+    if (JoinType_instance == null)
+      new JoinType();
+    return JoinType_instance;
+  }
+  function FromJoiner(type, table, on) {
+    this._type = type;
     this._table_0 = table;
     this._on = on;
   }
+  FromJoiner.prototype._get_type__1 = function () {
+    return this._type;
+  };
   FromJoiner.prototype._get_table__0 = function () {
     return this._table_0;
   };
@@ -2988,29 +3036,38 @@
     return result;
   };
   FromJoiner.prototype.component1_5 = function () {
-    return this._table_0;
+    return this._type;
   };
   FromJoiner.prototype.component2_5 = function () {
+    return this._table_0;
+  };
+  FromJoiner.prototype.component3_1 = function () {
     return this._on;
   };
-  FromJoiner.prototype.copy_4 = function (table, on) {
-    return new FromJoiner(table, on);
+  FromJoiner.prototype.copy_4 = function (type, table, on) {
+    return new FromJoiner(type, table, on);
   };
-  FromJoiner.prototype.copy$default_4 = function (table, on, $mask0, $handler) {
+  FromJoiner.prototype.copy$default_4 = function (type, table, on, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
-      table = this._table_0;
+      type = this._type;
     if (!(($mask0 & 2) === 0))
+      table = this._table_0;
+    if (!(($mask0 & 4) === 0))
       on = this._on;
-    return this.copy_4(table, on);
+    return this.copy_4(type, table, on);
   };
   FromJoiner.prototype.toString = function () {
-    return '' + 'FromJoiner(table=' + this._table_0 + ', on=' + toString_0(this._on) + ')';
+    return '' + 'FromJoiner(type=' + this._type + ', table=' + this._table_0 + ', on=' + toString_0(this._on) + ')';
   };
   FromJoiner.$metadata$ = {
     simpleName: 'FromJoiner',
     kind: 'class',
     interfaces: []
   };
+  Object.defineProperty(FromJoiner.prototype, 'type', {
+    configurable: true,
+    get: FromJoiner.prototype._get_type__1
+  });
   Object.defineProperty(FromJoiner.prototype, 'table', {
     configurable: true,
     get: FromJoiner.prototype._get_table__0
@@ -3094,15 +3151,15 @@
   });
   function QueryFieldJs(queryStructure, type, fieldGenerator, createWhereField, createOrderByField, createColumnLimiterField, createColumnsLimiterField) {
     QueryField.call(this, queryStructure);
-    this._type = type;
+    this._type_0 = type;
     this._fieldGenerator = fieldGenerator;
     this._createWhereField = createWhereField;
     this._createOrderByField = createOrderByField;
     this._createColumnLimiterField = createColumnLimiterField;
     this._createColumnsLimiterField = createColumnsLimiterField;
   }
-  QueryFieldJs.prototype._get_type__0 = function () {
-    return this._type;
+  QueryFieldJs.prototype._get_type__1 = function () {
+    return this._type_0;
   };
   QueryFieldJs.prototype._get_fieldGenerator__3 = function () {
     return this._fieldGenerator;
@@ -3157,6 +3214,10 @@
     var tmp = jsObj[prop];
     return (tmp == null ? true : isObject(tmp)) ? tmp : THROW_CCE();
   }
+  function jsThen(obj, cb) {
+    var tmp = Promise.resolve(obj).then(cb);
+    return (tmp == null ? true : isObject(tmp)) ? tmp : THROW_CCE();
+  }
   AbstractMutableList.prototype.get_11 = List.prototype.get_11;
   KClassImpl.prototype._get_simpleName__2 = KClass.prototype._get_simpleName__2;
   functionClasses = functionClasses$init$();
@@ -3188,6 +3249,10 @@
     get: QueryStructureAction_getInstance
   });
   $cloudself$cn$query.FromJoinerOn = FromJoinerOn;
+  Object.defineProperty($cloudself$cn$query, 'JoinType', {
+    configurable: true,
+    get: JoinType_getInstance
+  });
   $cloudself$cn$query.FromJoiner = FromJoiner;
   $cloudself$cn$query.QueryStructureFrom = QueryStructureFrom;
   $cloudself$cn.QueryFieldJs = QueryFieldJs;

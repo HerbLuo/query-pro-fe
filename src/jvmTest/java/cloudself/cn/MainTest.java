@@ -14,7 +14,7 @@ public class MainTest {
         final SettingQueryPro.Companion SettingQueryPro = cloudself.cn.example.SettingQueryPro.Companion;
 
         //noinspection unused
-        final List<Long> ids = SettingQueryPro.selectBy().id.equalsTo(1).columnLimiter().id();
+        final Long[] ids = SettingQueryPro.selectBy().id.equalsTo(1).columnLimiter().id();
 
         UserQueryPro.selectBy().name.is.equalsTo(1).and().age.is.equalsTo(1000).run();
 

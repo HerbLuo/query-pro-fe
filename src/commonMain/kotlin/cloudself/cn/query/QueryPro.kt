@@ -91,7 +91,7 @@ abstract class QueryProImpl<
         }
 
         val foreignJoinerOn = foreignFields.mapIndexed { index, field -> FromJoinerOn(currentTableFields[index], field) }
-        val newJoins = oldJoins + FromJoiner(foreignTableName, foreignJoinerOn.toTypedArray())
+        val newJoins = oldJoins + FromJoiner(JoinType.LEFT_JOIN, foreignTableName, foreignJoinerOn.toTypedArray())
 
         return createQuery(queryStructure.copy(from = oldFrom.copy(joins = newJoins)))
     }

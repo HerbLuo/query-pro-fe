@@ -2,6 +2,6 @@ export interface UserPriSetting {
     id: number;
     uid: string;
     kee: string;
-    value: string;
+    val: string;
     site: string;
 }

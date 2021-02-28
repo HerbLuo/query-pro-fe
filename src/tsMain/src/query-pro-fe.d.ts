@@ -159,15 +159,20 @@ export namespace cloudself.cn.query {
         hashCode(): number;
         equals(other: Nullable<any>): boolean;
     }
+    const JoinType: {
+        readonly LEFT_JOIN: string;
+    };
     class FromJoiner {
-        constructor(table: string, on: Array<cloudself.cn.query.FromJoinerOn>);
+        constructor(type: string, table: string, on: Array<cloudself.cn.query.FromJoinerOn>);
+        readonly type: string;
         readonly table: string;
         readonly on: Array<cloudself.cn.query.FromJoinerOn>;
         equals(other: Nullable<any>): boolean;
         hashCode(): number;
         component1(): string;
-        component2(): Array<cloudself.cn.query.FromJoinerOn>;
-        copy(table: string, on: Array<cloudself.cn.query.FromJoinerOn>): cloudself.cn.query.FromJoiner;
+        component2(): string;
+        component3(): Array<cloudself.cn.query.FromJoinerOn>;
+        copy(type: string, table: string, on: Array<cloudself.cn.query.FromJoinerOn>): cloudself.cn.query.FromJoiner;
         toString(): string;
     }
     class QueryStructureFrom {

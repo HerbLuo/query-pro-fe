@@ -3,6 +3,7 @@
 package cloudself.cn.query
 
 import cloudself.cn.expects.access
+import cloudself.cn.expects.jsThen
 import cloudself.cn.types.CreateQueryField
 import kotlin.js.JsExport
 import kotlin.jvm.JvmOverloads
@@ -55,11 +56,8 @@ abstract class FinalQueryField<
     }
 
     fun runLimit1(): T? {
-        val results = createField(queryStructure.copy(limit = 1)).run()
-        if (results.isEmpty()) {
-            return null
-        }
-        return results[0]
+        val resultsP = createField(queryStructure.copy(limit = 1)).run()
+        return jsThen(resultsP, { if (it.isEmpty()) null else it[0] })
     }
 
     fun run(): Array<T> {
