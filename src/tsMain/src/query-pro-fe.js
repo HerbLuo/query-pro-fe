@@ -2173,7 +2173,7 @@
     return this._createField;
   };
   QueryField.prototype.customColumn_0 = function (column) {
-    return new QueryKeywords(Field_init_$Create$(null, column, 1, null), this._queryStructure_0, this._get_createWhereField__2());
+    return new QueryKeywords(Field_init_$Create$(null, column, null, 5, null), this._queryStructure_0, this._get_createWhereField__2());
   };
   QueryField.prototype.and_0 = function () {
     if (!(this._get_type__1() === 'WHERE_FIELD')) {
@@ -2186,14 +2186,14 @@
     }if (factor == null) {
       var tmp = this._get_createWhereField__2();
       var tmp0_plus_0 = this._queryStructure_0._where;
-      var tmp1_plus_0 = WhereClause_init_$Create$(null, 'or', null, 5, null);
+      var tmp1_plus_0 = WhereClause_init_$Create$(null, 'or', null, null, 13, null);
       var tmp0_arrayOf_0_1 = [tmp1_plus_0];
       var tmp_0 = tmp0_plus_0.concat(tmp0_arrayOf_0_1);
       return tmp(this._queryStructure_0.copy$default(null, null, null, tmp_0, null, null, 55, null));
     }var tmp_1 = this._get_createWhereField__2();
     var orWhereClauses = factor(tmp_1(QueryStructure_init_$Create$(null, null, null, null, null, null, 63, null)))._queryStructure_0._where;
     var tmp2_plus_0 = this._queryStructure_0._where;
-    var tmp3_plus_0 = WhereClause_init_$Create$(null, 'or', orWhereClauses, 1, null);
+    var tmp3_plus_0 = WhereClause_init_$Create$(null, 'or', orWhereClauses, null, 9, null);
     var tmp0_arrayOf_0_1_0 = [tmp3_plus_0];
     var newWhereClause = tmp2_plus_0.concat(tmp0_arrayOf_0_1_0);
     var tmp_2 = this._get_createWhereField__2();
@@ -2263,38 +2263,39 @@
     return this._ignoreCase;
   };
   QueryKeywords.prototype.equalsTo_1 = function (value) {
-    return with_0(this, new WhereClause(this._field, '=', value));
+    return with_0(this, WhereClause_init_$Create$(this._field, '=', value, null, 8, null));
   };
   QueryKeywords.prototype.between_0 = function (start, end) {
     var tmp0_arrayOf_0 = [start, end];
-    return with_0(this, new WhereClause(this._field, 'between', tmp0_arrayOf_0));
+    var tmp = tmp0_arrayOf_0;
+    return with_0(this, WhereClause_init_$Create$(this._field, 'between', tmp, null, 8, null));
   };
   QueryKeywords.prototype.lessThan = function (value) {
-    return with_0(this, new WhereClause(this._field, '<', value));
+    return with_0(this, WhereClause_init_$Create$(this._field, '<', value, null, 8, null));
   };
   QueryKeywords.prototype.lessThanOrEqual = function (value) {
-    return with_0(this, new WhereClause(this._field, '<=', value));
+    return with_0(this, WhereClause_init_$Create$(this._field, '<=', value, null, 8, null));
   };
   QueryKeywords.prototype.graterThan = function (value) {
-    return with_0(this, new WhereClause(this._field, '>', value));
+    return with_0(this, WhereClause_init_$Create$(this._field, '>', value, null, 8, null));
   };
   QueryKeywords.prototype.graterThanOrEqual = function (value) {
-    return with_0(this, new WhereClause(this._field, '>=', value));
+    return with_0(this, WhereClause_init_$Create$(this._field, '>=', value, null, 8, null));
   };
   QueryKeywords.prototype.like_1 = function (str) {
-    return with_0(this, new WhereClause(this._field, 'like', str));
+    return with_0(this, WhereClause_init_$Create$(this._field, 'like', str, null, 8, null));
   };
   QueryKeywords.prototype.in_1 = function (values) {
-    return with_0(this, new WhereClause(this._field, 'in', values));
+    return with_0(this, WhereClause_init_$Create$(this._field, 'in', values, null, 8, null));
   };
   QueryKeywords.prototype.nul_0 = function () {
-    return with_0(this, WhereClause_init_$Create$(this._field, 'is null', null, 4, null));
+    return with_0(this, WhereClause_init_$Create$(this._field, 'is null', null, null, 12, null));
   };
   QueryKeywords.prototype.isNull = function () {
-    return with_0(this, WhereClause_init_$Create$(this._field, 'is null', null, 4, null));
+    return with_0(this, WhereClause_init_$Create$(this._field, 'is null', null, null, 12, null));
   };
   QueryKeywords.prototype.isNotNull = function () {
-    return with_0(this, WhereClause_init_$Create$(this._field, 'is not null', null, 4, null));
+    return with_0(this, WhereClause_init_$Create$(this._field, 'is not null', null, null, 12, null));
   };
   QueryKeywords.$metadata$ = {
     simpleName: 'QueryKeywords',
@@ -2325,20 +2326,21 @@
     this._createQueryField_0 = createQueryField;
   }
   QueryWithNotKeywords.prototype.equalsTo_1 = function (value) {
-    return with_1(this, new WhereClause(this._field_0, '<>', value));
+    return with_1(this, WhereClause_init_$Create$(this._field_0, '<>', value, null, 8, null));
   };
   QueryWithNotKeywords.prototype.between_0 = function (start, end) {
     var tmp0_arrayOf_0 = [start, end];
-    return with_1(this, new WhereClause(this._field_0, 'not between', tmp0_arrayOf_0));
+    var tmp = tmp0_arrayOf_0;
+    return with_1(this, WhereClause_init_$Create$(this._field_0, 'not between', tmp, null, 8, null));
   };
   QueryWithNotKeywords.prototype.like_1 = function (str) {
-    return with_1(this, new WhereClause(this._field_0, 'not like', str));
+    return with_1(this, WhereClause_init_$Create$(this._field_0, 'not like', str, null, 8, null));
   };
   QueryWithNotKeywords.prototype.in_1 = function (values) {
-    return with_1(this, new WhereClause(this._field_0, 'not in', values));
+    return with_1(this, WhereClause_init_$Create$(this._field_0, 'not in', values, null, 8, null));
   };
   QueryWithNotKeywords.prototype.nul_0 = function () {
-    return with_1(this, WhereClause_init_$Create$(this._field_0, 'is not null', null, 4, null));
+    return with_1(this, WhereClause_init_$Create$(this._field_0, 'is not null', null, null, 12, null));
   };
   QueryWithNotKeywords.$metadata$ = {
     simpleName: 'QueryWithNotKeywords',
@@ -2346,7 +2348,7 @@
     interfaces: []
   };
   function upperField($this, field) {
-    return Field_init_$Create$(null, '' + 'upper(' + field._table + '.' + field._column + ')', 1, null);
+    return Field_init_$Create$(null, '' + field._table + '.' + field._column, 'UPPER_CASE', 1, null);
   }
   function with_2($this, whereClause) {
     var tmp0_plus_0 = $this._queryStructure_3._where;
@@ -2360,24 +2362,13 @@
     this._createQueryField_1 = createQueryField;
   }
   QueryIgnoreCaseKeywords.prototype.equalsTo_1 = function (value) {
-    return with_2(this, new WhereClause(upperField(this, this._field_1), '=', '' + 'upper(' + value + ')'));
+    return with_2(this, new WhereClause(upperField(this, this._field_1), '=', value, 'UPPER_CASE'));
   };
   QueryIgnoreCaseKeywords.prototype.like_1 = function (str) {
-    return with_2(this, new WhereClause(upperField(this, this._field_1), 'like', '' + 'upper(' + str + ')'));
+    return with_2(this, new WhereClause(upperField(this, this._field_1), 'like', str, 'UPPER_CASE'));
   };
   QueryIgnoreCaseKeywords.prototype.in_1 = function (values) {
-    var tmp = upperField(this, this._field_1);
-    var tmp0_mapTo_0_1 = ArrayList_init_$Create$(values.length);
-    var indexedObject = values;
-    var inductionVariable = 0;
-    var last = indexedObject.length;
-    while (inductionVariable < last) {
-      var item_2_3 = indexedObject[inductionVariable];
-      inductionVariable = inductionVariable + 1 | 0;
-      tmp0_mapTo_0_1.add_4('' + 'upper(' + item_2_3 + ')');
-      Unit_getInstance();
-    }
-    return with_2(this, new WhereClause(tmp, 'in', tmp0_mapTo_0_1));
+    return with_2(this, new WhereClause(upperField(this, this._field_1), 'in', values, 'UPPER_CASE'));
   };
   QueryIgnoreCaseKeywords.$metadata$ = {
     simpleName: 'QueryIgnoreCaseKeywords',
@@ -2598,10 +2589,10 @@
   QueryStructure.prototype.component2_5 = function () {
     return this._fields;
   };
-  QueryStructure.prototype.component3_1 = function () {
+  QueryStructure.prototype.component3_2 = function () {
     return this._from;
   };
-  QueryStructure.prototype.component4 = function () {
+  QueryStructure.prototype.component4_0 = function () {
     return this._where;
   };
   QueryStructure.prototype.component5 = function () {
@@ -2721,18 +2712,43 @@
     configurable: true,
     get: OrderByClause.prototype._get_operator__0
   });
-  function Field_init_$Init$(table, column, $mask0, $marker, $this) {
+  function FieldCommands() {
+    FieldCommands_instance = this;
+    this._UPPER_CASE = 'UPPER_CASE';
+  }
+  FieldCommands.prototype._get_UPPER_CASE__0 = function () {
+    return this._UPPER_CASE;
+  };
+  FieldCommands.$metadata$ = {
+    simpleName: 'FieldCommands',
+    kind: 'object',
+    interfaces: []
+  };
+  Object.defineProperty(FieldCommands.prototype, 'UPPER_CASE', {
+    configurable: true,
+    get: FieldCommands.prototype._get_UPPER_CASE__0
+  });
+  var FieldCommands_instance;
+  function FieldCommands_getInstance() {
+    if (FieldCommands_instance == null)
+      new FieldCommands();
+    return FieldCommands_instance;
+  }
+  function Field_init_$Init$(table, column, commands, $mask0, $marker, $this) {
     if (!(($mask0 & 1) === 0))
       table = null;
-    Field.call($this, table, column);
+    if (!(($mask0 & 4) === 0))
+      commands = null;
+    Field.call($this, table, column, commands);
     return $this;
   }
-  function Field_init_$Create$(table, column, $mask0, $marker) {
-    return Field_init_$Init$(table, column, $mask0, $marker, Object.create(Field.prototype));
+  function Field_init_$Create$(table, column, commands, $mask0, $marker) {
+    return Field_init_$Init$(table, column, commands, $mask0, $marker, Object.create(Field.prototype));
   }
-  function Field(table, column) {
+  function Field(table, column, commands) {
     this._table = table;
     this._column = column;
+    this._commands = commands;
   }
   Field.prototype._get_table__0 = function () {
     return this._table;
@@ -2740,28 +2756,37 @@
   Field.prototype._get_column_ = function () {
     return this._column;
   };
+  Field.prototype._get_commands__0 = function () {
+    return this._commands;
+  };
   Field.prototype.component1_5 = function () {
     return this._table;
   };
   Field.prototype.component2_5 = function () {
     return this._column;
   };
-  Field.prototype.copy_1 = function (table, column) {
-    return new Field(table, column);
+  Field.prototype.component3_2 = function () {
+    return this._commands;
   };
-  Field.prototype.copy$default_1 = function (table, column, $mask0, $handler) {
+  Field.prototype.copy_1 = function (table, column, commands) {
+    return new Field(table, column, commands);
+  };
+  Field.prototype.copy$default_1 = function (table, column, commands, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
       table = this._table;
     if (!(($mask0 & 2) === 0))
       column = this._column;
-    return this.copy_1(table, column);
+    if (!(($mask0 & 4) === 0))
+      commands = this._commands;
+    return this.copy_1(table, column, commands);
   };
   Field.prototype.toString = function () {
-    return '' + 'Field(table=' + this._table + ', column=' + this._column + ')';
+    return '' + 'Field(table=' + this._table + ', column=' + this._column + ', commands=' + this._commands + ')';
   };
   Field.prototype.hashCode = function () {
     var result = this._table == null ? 0 : getStringHashCode(this._table);
     result = imul(result, 31) + getStringHashCode(this._column) | 0;
+    result = imul(result, 31) + (this._commands == null ? 0 : getStringHashCode(this._commands)) | 0;
     return result;
   };
   Field.prototype.equals = function (other) {
@@ -2775,6 +2800,8 @@
     if (!(this._table == tmp0_other_with_cast._table))
       return false;
     if (!(this._column === tmp0_other_with_cast._column))
+      return false;
+    if (!(this._commands == tmp0_other_with_cast._commands))
       return false;
     return true;
   };
@@ -2791,21 +2818,50 @@
     configurable: true,
     get: Field.prototype._get_column_
   });
-  function WhereClause_init_$Init$(field, operator, value, $mask0, $marker, $this) {
+  Object.defineProperty(Field.prototype, 'commands', {
+    configurable: true,
+    get: Field.prototype._get_commands__0
+  });
+  function WhereClauseCommands() {
+    WhereClauseCommands_instance = this;
+    this._UPPER_CASE_0 = 'UPPER_CASE';
+  }
+  WhereClauseCommands.prototype._get_UPPER_CASE__0 = function () {
+    return this._UPPER_CASE_0;
+  };
+  WhereClauseCommands.$metadata$ = {
+    simpleName: 'WhereClauseCommands',
+    kind: 'object',
+    interfaces: []
+  };
+  Object.defineProperty(WhereClauseCommands.prototype, 'UPPER_CASE', {
+    configurable: true,
+    get: WhereClauseCommands.prototype._get_UPPER_CASE__0
+  });
+  var WhereClauseCommands_instance;
+  function WhereClauseCommands_getInstance() {
+    if (WhereClauseCommands_instance == null)
+      new WhereClauseCommands();
+    return WhereClauseCommands_instance;
+  }
+  function WhereClause_init_$Init$(field, operator, value, commands, $mask0, $marker, $this) {
     if (!(($mask0 & 1) === 0))
       field = null;
     if (!(($mask0 & 4) === 0))
       value = null;
-    WhereClause.call($this, field, operator, value);
+    if (!(($mask0 & 8) === 0))
+      commands = null;
+    WhereClause.call($this, field, operator, value, commands);
     return $this;
   }
-  function WhereClause_init_$Create$(field, operator, value, $mask0, $marker) {
-    return WhereClause_init_$Init$(field, operator, value, $mask0, $marker, Object.create(WhereClause.prototype));
+  function WhereClause_init_$Create$(field, operator, value, commands, $mask0, $marker) {
+    return WhereClause_init_$Init$(field, operator, value, commands, $mask0, $marker, Object.create(WhereClause.prototype));
   }
-  function WhereClause(field, operator, value) {
+  function WhereClause(field, operator, value, commands) {
     this._field_4 = field;
     this._operator_0 = operator;
     this._value = value;
+    this._commands_0 = commands;
   }
   WhereClause.prototype._get_field__0 = function () {
     return this._field_4;
@@ -2816,34 +2872,43 @@
   WhereClause.prototype._get_value_ = function () {
     return this._value;
   };
+  WhereClause.prototype._get_commands__0 = function () {
+    return this._commands_0;
+  };
   WhereClause.prototype.component1_5 = function () {
     return this._field_4;
   };
   WhereClause.prototype.component2_5 = function () {
     return this._operator_0;
   };
-  WhereClause.prototype.component3_1 = function () {
+  WhereClause.prototype.component3_2 = function () {
     return this._value;
   };
-  WhereClause.prototype.copy_2 = function (field, operator, value) {
-    return new WhereClause(field, operator, value);
+  WhereClause.prototype.component4_0 = function () {
+    return this._commands_0;
   };
-  WhereClause.prototype.copy$default_2 = function (field, operator, value, $mask0, $handler) {
+  WhereClause.prototype.copy_2 = function (field, operator, value, commands) {
+    return new WhereClause(field, operator, value, commands);
+  };
+  WhereClause.prototype.copy$default_2 = function (field, operator, value, commands, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
       field = this._field_4;
     if (!(($mask0 & 2) === 0))
       operator = this._operator_0;
     if (!(($mask0 & 4) === 0))
       value = this._value;
-    return this.copy_2(field, operator, value);
+    if (!(($mask0 & 8) === 0))
+      commands = this._commands_0;
+    return this.copy_2(field, operator, value, commands);
   };
   WhereClause.prototype.toString = function () {
-    return '' + 'WhereClause(field=' + this._field_4 + ', operator=' + this._operator_0 + ', value=' + this._value + ')';
+    return '' + 'WhereClause(field=' + this._field_4 + ', operator=' + this._operator_0 + ', value=' + this._value + ', commands=' + this._commands_0 + ')';
   };
   WhereClause.prototype.hashCode = function () {
     var result = this._field_4 == null ? 0 : this._field_4.hashCode();
     result = imul(result, 31) + getStringHashCode(this._operator_0) | 0;
     result = imul(result, 31) + (this._value == null ? 0 : hashCode(this._value)) | 0;
+    result = imul(result, 31) + (this._commands_0 == null ? 0 : getStringHashCode(this._commands_0)) | 0;
     return result;
   };
   WhereClause.prototype.equals = function (other) {
@@ -2859,6 +2924,8 @@
     if (!(this._operator_0 === tmp0_other_with_cast._operator_0))
       return false;
     if (!equals(this._value, tmp0_other_with_cast._value))
+      return false;
+    if (!(this._commands_0 == tmp0_other_with_cast._commands_0))
       return false;
     return true;
   };
@@ -2878,6 +2945,10 @@
   Object.defineProperty(WhereClause.prototype, 'value', {
     configurable: true,
     get: WhereClause.prototype._get_value_
+  });
+  Object.defineProperty(WhereClause.prototype, 'commands', {
+    configurable: true,
+    get: WhereClause.prototype._get_commands__0
   });
   function QueryStructureAction() {
     QueryStructureAction_instance = this;
@@ -3041,7 +3112,7 @@
   FromJoiner.prototype.component2_5 = function () {
     return this._table_0;
   };
-  FromJoiner.prototype.component3_1 = function () {
+  FromJoiner.prototype.component3_2 = function () {
     return this._on;
   };
   FromJoiner.prototype.copy_4 = function (type, table, on) {
@@ -3242,7 +3313,15 @@
   $cloudself$cn$query.QueryProImpl = QueryProImpl;
   $cloudself$cn$query.QueryStructure = QueryStructure;
   $cloudself$cn$query.OrderByClause = OrderByClause;
+  Object.defineProperty($cloudself$cn$query, 'FieldCommands', {
+    configurable: true,
+    get: FieldCommands_getInstance
+  });
   $cloudself$cn$query.Field = Field;
+  Object.defineProperty($cloudself$cn$query, 'WhereClauseCommands', {
+    configurable: true,
+    get: WhereClauseCommands_getInstance
+  });
   $cloudself$cn$query.WhereClause = WhereClause;
   Object.defineProperty($cloudself$cn$query, 'QueryStructureAction', {
     configurable: true,

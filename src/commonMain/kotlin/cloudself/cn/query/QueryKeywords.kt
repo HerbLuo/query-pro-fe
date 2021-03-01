@@ -50,11 +50,11 @@ class QueryIgnoreCaseKeywords<F : QueryField<*, *, *, *, *, *>>(
     private val queryStructure: QueryStructure,
     private val createQueryField: CreateQueryField<F>,
 ) {
-    fun equalsTo(value: Any) = with(WhereClause(upperField(field), "=", "upper($value)"))
-    fun like(str: String) = with(WhereClause(upperField(field), "like", "upper($str)"))
-    fun `in`(vararg values: Any) = with(WhereClause(upperField(field), "in", values.map { "upper($it)" }))
+    fun equalsTo(value: Any) = with(WhereClause(upperField(field), "=", value, WhereClauseCommands.UPPER_CASE))
+    fun like(str: String) = with(WhereClause(upperField(field), "like", str, WhereClauseCommands.UPPER_CASE))
+    fun `in`(vararg values: Any) = with(WhereClause(upperField(field), "in", values, WhereClauseCommands.UPPER_CASE))
 
-    private fun upperField(field: Field) = Field(column = "upper(${field.table}.${field.column})")
+    private fun upperField(field: Field) = Field(column = "${field.table}.${field.column}")
     private fun with(whereClause: WhereClause) = createQueryField(queryStructure.copy(where = queryStructure.where + whereClause))
 }
 

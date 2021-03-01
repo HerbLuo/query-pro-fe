@@ -119,26 +119,36 @@ export namespace cloudself.cn.query {
         hashCode(): number;
         equals(other: Nullable<any>): boolean;
     }
+    const FieldCommands: {
+        readonly UPPER_CASE: string;
+    };
     class Field {
-        constructor(table: Nullable<string>, column: string);
+        constructor(table: Nullable<string>, column: string, commands: Nullable<string>);
         readonly table: Nullable<string>;
         readonly column: string;
+        readonly commands: Nullable<string>;
         component1(): Nullable<string>;
         component2(): string;
-        copy(table: Nullable<string>, column: string): cloudself.cn.query.Field;
+        component3(): Nullable<string>;
+        copy(table: Nullable<string>, column: string, commands: Nullable<string>): cloudself.cn.query.Field;
         toString(): string;
         hashCode(): number;
         equals(other: Nullable<any>): boolean;
     }
+    const WhereClauseCommands: {
+        readonly UPPER_CASE: string;
+    };
     class WhereClause {
-        constructor(field: Nullable<cloudself.cn.query.Field>, operator: string, value: Nullable<any>);
+        constructor(field: Nullable<cloudself.cn.query.Field>, operator: string, value: Nullable<any>, commands: Nullable<string>);
         readonly field: Nullable<cloudself.cn.query.Field>;
         readonly operator: string;
         readonly value: Nullable<any>;
+        readonly commands: Nullable<string>;
         component1(): Nullable<cloudself.cn.query.Field>;
         component2(): string;
         component3(): Nullable<any>;
-        copy(field: Nullable<cloudself.cn.query.Field>, operator: string, value: Nullable<any>): cloudself.cn.query.WhereClause;
+        component4(): Nullable<string>;
+        copy(field: Nullable<cloudself.cn.query.Field>, operator: string, value: Nullable<any>, commands: Nullable<string>): cloudself.cn.query.WhereClause;
         toString(): string;
         hashCode(): number;
         equals(other: Nullable<any>): boolean;

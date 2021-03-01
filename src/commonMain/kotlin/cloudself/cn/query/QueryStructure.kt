@@ -4,7 +4,6 @@ package cloudself.cn.query
 
 import kotlin.js.JsExport
 import kotlin.js.JsName
-import kotlin.jvm.JvmField
 
 data class QueryStructure(
     @JsName("action")
@@ -52,10 +51,15 @@ data class Field(
     val column: String,
 )
 
+object WhereClauseCommands {
+    const val UPPER_CASE = "UPPER_CASE"
+}
+
 data class WhereClause(
     val field: Field? = null,
     val operator: String,
-    val value: Any? = null // null arrayOr<string boolean integer long date> WhereClause[]
+    val value: Any? = null, // null arrayOr<string boolean integer long date> WhereClause[]
+    val commands: String? = null,
 )
 
 object QueryStructureAction {
