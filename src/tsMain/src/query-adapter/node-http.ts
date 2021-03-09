@@ -12,6 +12,7 @@ export const createNodeHttpQueryAdapter = (
         // console.log(qsJson);
         const result = await fetch(url, {
             method: "POST",
+            headers: { "Content-Type": "application/json;charset=UTF-8" },
             body: qsJson,
         }).then(r => r.json());
         if (!result) {

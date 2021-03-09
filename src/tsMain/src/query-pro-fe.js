@@ -2173,7 +2173,7 @@
     return this._createField;
   };
   QueryField.prototype.customColumn_0 = function (column) {
-    return new QueryKeywords(Field_init_$Create$(null, column, null, 5, null), this._queryStructure_0, this._get_createWhereField__2());
+    return new QueryKeywords(Field_init_$Create$(null, column, 1, null), this._queryStructure_0, this._get_createWhereField__2());
   };
   QueryField.prototype.and_0 = function () {
     if (!(this._get_type__1() === 'WHERE_FIELD')) {
@@ -2348,7 +2348,7 @@
     interfaces: []
   };
   function upperField($this, field) {
-    return Field_init_$Create$(null, '' + field._table + '.' + field._column, 'UPPER_CASE', 1, null);
+    return Field_init_$Create$(null, '' + field._table + '.' + field._column, 1, null);
   }
   function with_2($this, whereClause) {
     var tmp0_plus_0 = $this._queryStructure_3._where;
@@ -2589,7 +2589,7 @@
   QueryStructure.prototype.component2_5 = function () {
     return this._fields;
   };
-  QueryStructure.prototype.component3_2 = function () {
+  QueryStructure.prototype.component3_1 = function () {
     return this._from;
   };
   QueryStructure.prototype.component4_0 = function () {
@@ -2712,43 +2712,18 @@
     configurable: true,
     get: OrderByClause.prototype._get_operator__0
   });
-  function FieldCommands() {
-    FieldCommands_instance = this;
-    this._UPPER_CASE = 'UPPER_CASE';
-  }
-  FieldCommands.prototype._get_UPPER_CASE__0 = function () {
-    return this._UPPER_CASE;
-  };
-  FieldCommands.$metadata$ = {
-    simpleName: 'FieldCommands',
-    kind: 'object',
-    interfaces: []
-  };
-  Object.defineProperty(FieldCommands.prototype, 'UPPER_CASE', {
-    configurable: true,
-    get: FieldCommands.prototype._get_UPPER_CASE__0
-  });
-  var FieldCommands_instance;
-  function FieldCommands_getInstance() {
-    if (FieldCommands_instance == null)
-      new FieldCommands();
-    return FieldCommands_instance;
-  }
-  function Field_init_$Init$(table, column, commands, $mask0, $marker, $this) {
+  function Field_init_$Init$(table, column, $mask0, $marker, $this) {
     if (!(($mask0 & 1) === 0))
       table = null;
-    if (!(($mask0 & 4) === 0))
-      commands = null;
-    Field.call($this, table, column, commands);
+    Field.call($this, table, column);
     return $this;
   }
-  function Field_init_$Create$(table, column, commands, $mask0, $marker) {
-    return Field_init_$Init$(table, column, commands, $mask0, $marker, Object.create(Field.prototype));
+  function Field_init_$Create$(table, column, $mask0, $marker) {
+    return Field_init_$Init$(table, column, $mask0, $marker, Object.create(Field.prototype));
   }
-  function Field(table, column, commands) {
+  function Field(table, column) {
     this._table = table;
     this._column = column;
-    this._commands = commands;
   }
   Field.prototype._get_table__0 = function () {
     return this._table;
@@ -2756,37 +2731,28 @@
   Field.prototype._get_column_ = function () {
     return this._column;
   };
-  Field.prototype._get_commands__0 = function () {
-    return this._commands;
-  };
   Field.prototype.component1_5 = function () {
     return this._table;
   };
   Field.prototype.component2_5 = function () {
     return this._column;
   };
-  Field.prototype.component3_2 = function () {
-    return this._commands;
+  Field.prototype.copy_1 = function (table, column) {
+    return new Field(table, column);
   };
-  Field.prototype.copy_1 = function (table, column, commands) {
-    return new Field(table, column, commands);
-  };
-  Field.prototype.copy$default_1 = function (table, column, commands, $mask0, $handler) {
+  Field.prototype.copy$default_1 = function (table, column, $mask0, $handler) {
     if (!(($mask0 & 1) === 0))
       table = this._table;
     if (!(($mask0 & 2) === 0))
       column = this._column;
-    if (!(($mask0 & 4) === 0))
-      commands = this._commands;
-    return this.copy_1(table, column, commands);
+    return this.copy_1(table, column);
   };
   Field.prototype.toString = function () {
-    return '' + 'Field(table=' + this._table + ', column=' + this._column + ', commands=' + this._commands + ')';
+    return '' + 'Field(table=' + this._table + ', column=' + this._column + ')';
   };
   Field.prototype.hashCode = function () {
     var result = this._table == null ? 0 : getStringHashCode(this._table);
     result = imul(result, 31) + getStringHashCode(this._column) | 0;
-    result = imul(result, 31) + (this._commands == null ? 0 : getStringHashCode(this._commands)) | 0;
     return result;
   };
   Field.prototype.equals = function (other) {
@@ -2800,8 +2766,6 @@
     if (!(this._table == tmp0_other_with_cast._table))
       return false;
     if (!(this._column === tmp0_other_with_cast._column))
-      return false;
-    if (!(this._commands == tmp0_other_with_cast._commands))
       return false;
     return true;
   };
@@ -2818,16 +2782,12 @@
     configurable: true,
     get: Field.prototype._get_column_
   });
-  Object.defineProperty(Field.prototype, 'commands', {
-    configurable: true,
-    get: Field.prototype._get_commands__0
-  });
   function WhereClauseCommands() {
     WhereClauseCommands_instance = this;
-    this._UPPER_CASE_0 = 'UPPER_CASE';
+    this._UPPER_CASE = 'UPPER_CASE';
   }
-  WhereClauseCommands.prototype._get_UPPER_CASE__0 = function () {
-    return this._UPPER_CASE_0;
+  WhereClauseCommands.prototype._get_UPPER_CASE_ = function () {
+    return this._UPPER_CASE;
   };
   WhereClauseCommands.$metadata$ = {
     simpleName: 'WhereClauseCommands',
@@ -2836,7 +2796,7 @@
   };
   Object.defineProperty(WhereClauseCommands.prototype, 'UPPER_CASE', {
     configurable: true,
-    get: WhereClauseCommands.prototype._get_UPPER_CASE__0
+    get: WhereClauseCommands.prototype._get_UPPER_CASE_
   });
   var WhereClauseCommands_instance;
   function WhereClauseCommands_getInstance() {
@@ -2861,7 +2821,7 @@
     this._field_4 = field;
     this._operator_0 = operator;
     this._value = value;
-    this._commands_0 = commands;
+    this._commands = commands;
   }
   WhereClause.prototype._get_field__0 = function () {
     return this._field_4;
@@ -2872,8 +2832,8 @@
   WhereClause.prototype._get_value_ = function () {
     return this._value;
   };
-  WhereClause.prototype._get_commands__0 = function () {
-    return this._commands_0;
+  WhereClause.prototype._get_commands_ = function () {
+    return this._commands;
   };
   WhereClause.prototype.component1_5 = function () {
     return this._field_4;
@@ -2881,11 +2841,11 @@
   WhereClause.prototype.component2_5 = function () {
     return this._operator_0;
   };
-  WhereClause.prototype.component3_2 = function () {
+  WhereClause.prototype.component3_1 = function () {
     return this._value;
   };
   WhereClause.prototype.component4_0 = function () {
-    return this._commands_0;
+    return this._commands;
   };
   WhereClause.prototype.copy_2 = function (field, operator, value, commands) {
     return new WhereClause(field, operator, value, commands);
@@ -2898,17 +2858,17 @@
     if (!(($mask0 & 4) === 0))
       value = this._value;
     if (!(($mask0 & 8) === 0))
-      commands = this._commands_0;
+      commands = this._commands;
     return this.copy_2(field, operator, value, commands);
   };
   WhereClause.prototype.toString = function () {
-    return '' + 'WhereClause(field=' + this._field_4 + ', operator=' + this._operator_0 + ', value=' + this._value + ', commands=' + this._commands_0 + ')';
+    return '' + 'WhereClause(field=' + this._field_4 + ', operator=' + this._operator_0 + ', value=' + this._value + ', commands=' + this._commands + ')';
   };
   WhereClause.prototype.hashCode = function () {
     var result = this._field_4 == null ? 0 : this._field_4.hashCode();
     result = imul(result, 31) + getStringHashCode(this._operator_0) | 0;
     result = imul(result, 31) + (this._value == null ? 0 : hashCode(this._value)) | 0;
-    result = imul(result, 31) + (this._commands_0 == null ? 0 : getStringHashCode(this._commands_0)) | 0;
+    result = imul(result, 31) + (this._commands == null ? 0 : getStringHashCode(this._commands)) | 0;
     return result;
   };
   WhereClause.prototype.equals = function (other) {
@@ -2925,7 +2885,7 @@
       return false;
     if (!equals(this._value, tmp0_other_with_cast._value))
       return false;
-    if (!(this._commands_0 == tmp0_other_with_cast._commands_0))
+    if (!(this._commands == tmp0_other_with_cast._commands))
       return false;
     return true;
   };
@@ -2948,7 +2908,7 @@
   });
   Object.defineProperty(WhereClause.prototype, 'commands', {
     configurable: true,
-    get: WhereClause.prototype._get_commands__0
+    get: WhereClause.prototype._get_commands_
   });
   function QueryStructureAction() {
     QueryStructureAction_instance = this;
@@ -3112,7 +3072,7 @@
   FromJoiner.prototype.component2_5 = function () {
     return this._table_0;
   };
-  FromJoiner.prototype.component3_2 = function () {
+  FromJoiner.prototype.component3_1 = function () {
     return this._on;
   };
   FromJoiner.prototype.copy_4 = function (type, table, on) {
@@ -3313,10 +3273,6 @@
   $cloudself$cn$query.QueryProImpl = QueryProImpl;
   $cloudself$cn$query.QueryStructure = QueryStructure;
   $cloudself$cn$query.OrderByClause = OrderByClause;
-  Object.defineProperty($cloudself$cn$query, 'FieldCommands', {
-    configurable: true,
-    get: FieldCommands_getInstance
-  });
   $cloudself$cn$query.Field = Field;
   Object.defineProperty($cloudself$cn$query, 'WhereClauseCommands', {
     configurable: true,

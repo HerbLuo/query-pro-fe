@@ -119,18 +119,13 @@ export namespace cloudself.cn.query {
         hashCode(): number;
         equals(other: Nullable<any>): boolean;
     }
-    const FieldCommands: {
-        readonly UPPER_CASE: string;
-    };
     class Field {
-        constructor(table: Nullable<string>, column: string, commands: Nullable<string>);
+        constructor(table: Nullable<string>, column: string);
         readonly table: Nullable<string>;
         readonly column: string;
-        readonly commands: Nullable<string>;
         component1(): Nullable<string>;
         component2(): string;
-        component3(): Nullable<string>;
-        copy(table: Nullable<string>, column: string, commands: Nullable<string>): cloudself.cn.query.Field;
+        copy(table: Nullable<string>, column: string): cloudself.cn.query.Field;
         toString(): string;
         hashCode(): number;
         equals(other: Nullable<any>): boolean;
